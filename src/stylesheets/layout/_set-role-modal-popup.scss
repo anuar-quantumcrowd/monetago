@@ -1,0 +1,64 @@
+.ui.tiny.modal.transition.visible.active {
+  top: 50%;
+  right: 5%;
+
+  overflow-y: hidden;
+
+  transform: translate(0, -50%);
+}
+.set-role-content {
+  display: flex;
+  flex-direction: column;
+
+  p {
+    font-size: 28px;
+    color: #182e58;
+    text-align: left;
+
+    opacity: 1;
+  }
+  .dropdown-select-role {
+    margin-top: -3%;
+    height: 50px;
+
+    font-size: 18px;
+    letter-spacing: 0;
+    color: #182e58;
+  }
+  .btn-container {
+    margin-top: 20px;
+    width: 100%;
+
+    text-align: -webkit-right;
+
+    .btn-cancel {
+      margin-right: 10px;
+      width: 150px;
+      height: 50px;
+
+      font-size: 14px;
+    }
+    .btn-save {
+      margin-right: 0;
+      width: 150px;
+      height: 50px;
+
+      font-size: 14px;
+      color: #fff;
+
+      background-color: #2874ad;
+    }
+  }
+}
+.ui.modal > .content {
+  display: flex;
+  flex-direction: column;
+  padding: 7% 9%;
+}
+
+@media only screen and (min-width: 1200px) {
+  .ui.mini.modal {
+    margin: 0;
+    width: 500px;
+  }
+}
