@@ -1,0 +1,62 @@
+.innertab-wrapper {
+  display: flex;
+  flex-basis: 85%;
+  margin-bottom: 40px;
+  width: 100%;
+  max-width: 100%;
+  height: 40px;
+
+  border-bottom: 1px solid $gray-100;
+
+
+  .innertab-item {
+    position: relative;
+
+    cursor: pointer;
+
+    div {
+      display: flex;
+      justify-content: center;
+      padding: 12px 20px;
+
+      transition: all .3s ease-in-out;
+  
+  
+      &:before {
+        content: "";
+  
+        position: absolute;
+        bottom: 0;
+        left: 0;
+  
+        width: 0;
+        height: 2px;
+  
+        background-color: $blue-400;
+  
+        transition: all .3s ease-in-out;
+      }
+    }
+  }
+
+  .active {
+    div {
+      transition: all .3s ease-in-out;
+
+      &:before {
+        content: "";
+  
+        position: absolute;
+        bottom: 0;
+        left: 0;
+  
+        width: 100%;
+        height: 2px;
+  
+        background-color: $blue-400;
+  
+        transition: all .3s ease-in-out;
+      }
+    }
+  }
+}

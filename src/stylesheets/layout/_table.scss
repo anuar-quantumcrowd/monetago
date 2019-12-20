@@ -1,0 +1,112 @@
+/**  Copyright 2020 MonetaGo, Inc.  All Rights Reserved.
+ *  This code is copyrighted material that is confidential andproprietary to MonetaGo, Inc.
+ *  and may not (in whole or in part) be published, publicly displayed,copied, modified or
+ *  used in any way other than as expressly permitted in a writtenagreement executed by
+ *  MonetaGo, Inc.  No portion of this code may be used to createderivative works or exploited
+ *  in any other way without MonetaGo, Inc.’s prior written consent.  Noportion of this code
+ *  may be transmitted or redistributed to any person without MonetaGo,Inc.’s prior written
+ *  consent. This notice may not be deleted or modified without MonetaGo,Inc.’s consent.
+ */
+
+.admin-table-wrapper {
+  .search-input {
+    margin: 40px 0;
+    width: 35%;
+  }
+
+  .table {
+    &-details {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &-page {
+      p {
+        margin: auto 20px;
+        margin-top: 13px;
+
+        .prev-icon {
+          padding-bottom: 1px;
+          margin-right: 10px;
+          width: 10px;
+
+          cursor: pointer;
+        }
+
+        .next-icon {
+          padding-bottom: 1px;
+          margin-left: 10px;
+          width: 10px;
+
+          cursor: pointer;
+
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+
+  .ui.table {
+    .ui.checkbox  {
+      input:checked ~ label:after {
+        content: '\2713';
+
+        color: $white;
+      }
+
+      input:checked ~ label:before {
+        border-color: $blue-400;
+
+        background: $blue-400;
+      }
+    }
+
+    & thead th {
+      font-weight: 400;
+
+      background: none;
+    }
+
+    .sort-arrow {
+      width: 13px;
+
+      cursor: pointer;
+    }
+
+    .btn-menu {
+      display: flex;
+      justify-content: center;
+      width: 5px;
+
+      background: none;
+    }
+
+    .vertical-menu {
+      width: 20px;
+    }
+
+    .user-id {
+      font-weight: 700;
+      color: $blue-600;
+    }
+
+    .activity {
+      display: flex;
+      justify-content: space-around;
+
+      & .active,
+      & .inactive {
+        padding: 5px 20px;
+
+        color: $white;
+
+        background-color: $blue-400;
+        border-radius: 20px;
+      }
+
+      & .inactive {
+        background-color: $gray-400;
+      }
+    }
+  }
+}

@@ -1,0 +1,101 @@
+/**  Copyright 2020 MonetaGo, Inc.  All Rights Reserved.
+ *  This code is copyrighted material that is confidential andproprietary to MonetaGo, Inc.
+ *  and may not (in whole or in part) be published, publicly displayed,copied, modified or
+ *  used in any way other than as expressly permitted in a writtenagreement executed by
+ *  MonetaGo, Inc.  No portion of this code may be used to createderivative works or exploited
+ *  in any other way without MonetaGo, Inc.’s prior written consent.  Noportion of this code
+ *  may be transmitted or redistributed to any person without MonetaGo,Inc.’s prior written
+ *  consent. This notice may not be deleted or modified without MonetaGo,Inc.’s consent.
+ */
+
+.content-header-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  .back-link {
+    display: flex;
+    flex-direction: row;
+
+    text-align: left;
+
+    span {
+      margin-left: 10px;
+
+      font-size: 16px;
+      font-style: normal;
+      letter-spacing: 0;
+      color: #182e58;
+
+      text-decoration: underline;
+
+      opacity: 1;
+      cursor: pointer;
+    }
+
+    .ui.image {
+      cursor: pointer;
+    }
+  }
+
+  .main-header {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+
+    p {
+      font-size: 28px;
+      letter-spacing: 0;
+      color: #182e58;
+      text-align: left;
+
+      opacity: 1;
+    }
+
+    .add-user-btn {
+      margin-left: 2%;
+      height: 40px;
+
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: .9px;
+      color: #2872ab;
+      text-align: left;
+
+      border: 1px solid #bfc7d6;
+      border-radius: 5px;
+
+      opacity: 1;
+
+      background: #fff 0% 0% no-repeat padding-box;
+    }
+  }
+
+  .org-type {
+    display: flex;
+    flex-direction: row;
+
+    .text-type {
+      margin-right: 5px;
+
+      font-size: 14px;
+      letter-spacing: 0;
+      color: #616f8a;
+      text-align: left;
+    }
+    .org {
+      font-size: 14px;
+      letter-spacing: 0;
+      color: #45a5ef;
+      text-align: left;
+    }
+  }
+  .supply {
+    font-size: 14px;
+    letter-spacing: 0;
+    color: #616f8a;
+    text-align: left;
+
+    opacity: 1;
+  }
+}

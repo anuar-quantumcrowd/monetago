@@ -1,0 +1,15 @@
+.table-filter {
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
+
+  p {
+    margin: auto 0;
+
+    color: $gray-200;
+  }
+
+  .ui.selection.dropdown {
+    border-radius: 10px;
+  }
+}
