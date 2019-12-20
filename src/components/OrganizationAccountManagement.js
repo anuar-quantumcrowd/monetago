@@ -20,9 +20,11 @@ const OrganizationAccountManagement = () => {
     <div>
       <ContentHeader
         contentHeaderTitle={data.selectedOrg.name}
-        btnContent="Add user"
+        btnContent="Add User"
         type="cards"
         icon="add"
+        info={data.selectedOrg.info}
+        orgType={data.selectedOrg.type}
       />
       <InnerTabs
         onClickTab={onClickTab}

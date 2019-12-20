@@ -16,7 +16,7 @@ import CommonDropdown from '../common/CommonDropdown'
 
 import CommonButtons from '../common/CommonButton'
 
-const AddOrganizationUser = () => {
+const AddOrganizationUser = ({ company }) => {
   const [state, setstate] = useState({})
 
   const handleChange = e => {
@@ -70,7 +70,7 @@ const AddOrganizationUser = () => {
             name={data.name}
             options={roles}
             dropdownClass={data.dropClass}
-            value={state.name}
+            value={data.name === 'orgName' ? company : state.name}
             onChange={e => {
               data.inputType === CommonDropdown
                 ? handleDropDownChange(e)

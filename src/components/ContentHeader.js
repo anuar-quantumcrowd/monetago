@@ -14,11 +14,19 @@ import { orgActiveStep } from '../redux'
 import { Image } from 'semantic-ui-react'
 import MainModal from '../components/MainModal'
 import AddUserOnAccountTab from './AddUserOnAccountTab'
-// import EditUserOnAccount from './EditUserOnAccount'
+import EditUserOnAccount from './EditUserOnAccount'
 import EditUserOnOrganization from './EditUserOnOrganization'
 import AddNewOrganization from './AddNewOrganization'
+import AddOrganizationUser from './AddOrganizationUser'
 
-const ContentHeader = ({ contentHeaderTitle, btnContent, type = '', icon }) => {
+const ContentHeader = ({
+  contentHeaderTitle,
+  btnContent,
+  type = '',
+  icon,
+  info,
+  orgType
+}) => {
   // const back = () => {
   //   window.history.back()
   // }
@@ -46,6 +54,8 @@ const ContentHeader = ({ contentHeaderTitle, btnContent, type = '', icon }) => {
 
           {btnContent === 'Add Organization' ? (
             <AddNewOrganization />
+          ) : btnContent === 'Add User' && type === 'cards' ? (
+            <AddOrganizationUser company={contentHeaderTitle} />
           ) : btnContent === 'Add User' ? (
             <AddUserOnAccountTab />
           ) : btnContent === 'Edit User' ? (
@@ -55,10 +65,10 @@ const ContentHeader = ({ contentHeaderTitle, btnContent, type = '', icon }) => {
       </div>
       {type === 'cards' ? (
         <div>
-          <p className="supply">Construction Supply</p>
+          <p className="supply">{info}</p>
           <div className="org-type">
             <p className="text-type">Type:</p>
-            <p className="org">Credit Ratings Agency</p>
+            <p className="org">{orgType}</p>
           </div>
         </div>
       ) : type === 'OrgAndAcct' ? (

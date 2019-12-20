@@ -24,7 +24,7 @@ const actions = [
   },
   {
     icon: require('../assets/svg/edit.svg'),
-    text: 'Edit Role'
+    text: 'Edit User'
   },
   {
     icon: require('../assets/svg/delete.svg'),
@@ -136,7 +136,8 @@ const UserTable = ({ content }) => {
                                   <img
                                     src={action.icon}
                                     alt={`${action.text} Icon`}
-                                  />{' '}
+                                    className="action-icon"
+                                  />
                                   {action.text}
                                 </p>
                               )

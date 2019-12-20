@@ -3,6 +3,21 @@ import { useSelector, useDispatch } from 'react-redux'
 import { orgActiveStep, orgProfile } from '../redux'
 import { Icon, Popup } from 'semantic-ui-react'
 
+const actions = [
+  {
+    icon: require('../assets/svg/settings.svg'),
+    text: 'Manage Users'
+  },
+  {
+    icon: require('../assets/svg/edit.svg'),
+    text: 'Edit Identity'
+  },
+  {
+    icon: require('../assets/svg/delete.svg'),
+    text: 'Delete'
+  }
+]
+
 const OrganizationCard = () => {
   const org = useSelector(state => state.organization)
   const dispatch = useDispatch()
@@ -20,14 +35,14 @@ const OrganizationCard = () => {
               >
                 {item.status}
               </span>
-              <Popup
+              {/* <Popup
                 trigger={<Icon name="ellipsis horizontal" />}
                 on="click"
                 pinned
                 basic
                 position="top left"
                 content={
-                  <div>
+                  <div className="org-card-option-wrapper">
                     <div className="org-card-option popup-option-text">
                       <img
                         src={require('../assets/svg/settings.svg')}
@@ -48,6 +63,28 @@ const OrganizationCard = () => {
                     </div>
                   </div>
                 }
+              /> */}
+              <Popup
+                className="action-popup"
+                trigger={<Icon name="ellipsis horizontal" />}
+                content={
+                  <div className="action-menu">
+                    {actions.map((action, i) => {
+                      return (
+                        <p key={i} className="actions">
+                          <img
+                            src={action.icon}
+                            alt={`${action.text} Icon`}
+                            className="action-icon"
+                          />{' '}
+                          {action.text}
+                        </p>
+                      )
+                    })}
+                  </div>
+                }
+                on="click"
+                position="top left"
               />
             </div>
             <div className="org-card-content">

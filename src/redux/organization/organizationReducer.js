@@ -380,7 +380,7 @@ const selectedUsers = (state, action) => {
   }
 
   state.selectedOrg.users.map(data => {
-    data.selected ? selectedArr.push(data.userId) : null
+    return data.selected ? selectedArr.push(data.userId) : null
   })
 
   selectedArr.length === state.selectedOrg.users.length

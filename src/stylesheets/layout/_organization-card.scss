@@ -120,17 +120,21 @@
     @extend .flex-content;
   }
 
-  &-option {
-    margin-bottom: 15px;
+  // &-option-wrapper {
+  //   padding: 20px 15px;
+  // }
 
-    cursor: pointer;
+  // &-option {
+  //   margin-bottom: 15px;
 
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
+  //   cursor: pointer;
 
-  &-option-txt {
-    margin-left: 8px;
-  }
+  //   &:last-child {
+  //     margin-bottom: 0;
+  //   }
+  // }
+
+  // &-option-txt {
+  //   margin-left: 8px;
+  // }
 }
