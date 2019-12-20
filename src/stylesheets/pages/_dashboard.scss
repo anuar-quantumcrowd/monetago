@@ -1,0 +1,29 @@
+.dashboard {
+  display: flex;
+
+  &-account {    
+    margin: 80px;
+
+    animation-name: fadeIn;
+    animation-duration: .5s;
+  }
+
+  &-org {
+    margin: 80px;
+
+    animation-name: fadeIn;
+    animation-duration: .5s;
+  }
+
+  &-content {
+    flex-basis: 85%;
+
+    animation-name: fadeIn;
+    animation-duration: .3s;
+  }
+}
+
+.modal {
+  animation-name: fadeIn;
+  animation-duration: .5s;
+}

@@ -1,0 +1,53 @@
+/**  Copyright 2020 MonetaGo, Inc.  All Rights Reserved.
+ *  This code is copyrighted material that is confidential andproprietary to MonetaGo, Inc.
+ *  and may not (in whole or in part) be published, publicly displayed,copied, modified or
+ *  used in any way other than as expressly permitted in a writtenagreement executed by
+ *  MonetaGo, Inc.  No portion of this code may be used to createderivative works or exploited
+ *  in any other way without MonetaGo, Inc.’s prior written consent.  Noportion of this code
+ *  may be transmitted or redistributed to any person without MonetaGo,Inc.’s prior written
+ *  consent. This notice may not be deleted or modified without MonetaGo,Inc.’s consent.
+ */
+
+.modal-popup.ui.tiny.modal.transition.visible.active {
+  top: 50%;
+  right: 5%;
+
+  overflow-y: hidden;
+
+  transform: translate(0, -50%);
+}
+
+.delete-content {
+  text-align: center;
+
+  p {
+    margin-bottom: 30px;
+
+    font-size: 28px;
+    font-weight: 500;
+    color: #182e58;
+  }
+
+  .btn-actions {
+    .btn-cancel {
+      margin-right: 30px;
+      width: 150px;
+      height: 50px;
+
+      font-size: 16px;
+    }
+    .btn-deact {
+      width: 150px;
+      height: 50px;
+
+      font-size: 16px;
+      color: #fff;
+
+      background-color: #2874ad;
+    }
+  }
+}
+
+.ui.modal > .content {
+  padding: 7% 14%;
+}

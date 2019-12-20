@@ -1,0 +1,15 @@
+.modals.dimmer .ui.scrolling.modal {
+  margin: 0;
+}
+
+.ui.modal > .content {
+  padding: 3rem 4rem;
+  height: 100%;
+}
+
+.main-modal {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}

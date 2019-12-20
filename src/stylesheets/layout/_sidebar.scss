@@ -1,0 +1,47 @@
+.sidebar {
+ 
+  flex-basis: 15%;
+  height: 100vh;
+
+  box-shadow: 0 8px 40px #7989a833;
+
+  opacity: 1;
+
+  background: #fff 0% 0% no-repeat padding-box;
+  
+  .sidebar-title {
+    padding: 30px 0 30px 40px;
+
+    border-bottom: 1px solid $gray-50;
+
+    img {
+      margin-right: 14px;
+    }
+  }
+
+  .side-item {
+    padding-left: 40px;
+  }
+
+  .sidebar-sub-item {
+    padding: 30px 0;
+
+    @include on-event {
+      cursor: pointer;
+    }
+
+    span {
+      img {
+        margin-right: 14px;
+      }
+    }
+  }
+
+  .active {
+    background-color: #45a5ef;
+
+    span {
+      color: $white;
+    }
+  }
+}

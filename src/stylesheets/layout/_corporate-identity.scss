@@ -1,0 +1,40 @@
+.corporate-identity {
+  margin-top: 30px;
+  margin-left: 80px;
+  max-width: 900px;
+
+  &-info:first-child .edit-holder {
+    display: none;
+  }
+
+  .edit-holder {
+    position: relative;
+
+    margin-bottom: 20px;
+
+    border-bottom: 1px solid $gray-100;
+
+    .edit-btn {
+      position: absolute;
+      top: 50%;
+      right: 0;
+
+      width: 70px;
+
+      text-align: center;
+
+      cursor: pointer;
+      transform: translate(0%, -50%);
+
+      background: #fff;
+    }
+  }
+
+  textarea.corporate-textarea {
+    width: 50%;
+
+    border: none;
+
+    resize: none;
+  }
+}
