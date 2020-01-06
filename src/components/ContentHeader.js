@@ -69,10 +69,9 @@ const ContentHeader = ({
             />
           ) : btnContent === 'Add User' ? (
             <AddUserOnAccountTab showModal={setShowModal} />
-          ) : 
-          // btnContent === 'Edit User' ? (
+          ) : // btnContent === 'Edit User' ? (
           //   <EditUserOnAccount />
-          // ) : 
+          // ) :
           null}
         </MainModal>
       </div>
