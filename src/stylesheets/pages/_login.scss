@@ -1,72 +1,12 @@
-/**  Copyright 2020 MonetaGo, Inc.  All Rights Reserved.
- *  This code is copyrighted material that is confidential andproprietary to MonetaGo, Inc.
- *  and may not (in whole or in part) be published, publicly displayed,copied, modified or
- *  used in any way other than as expressly permitted in a writtenagreement executed by
- *  MonetaGo, Inc.  No portion of this code may be used to createderivative works or exploited
- *  in any other way without MonetaGo, Inc.’s prior written consent.  Noportion of this code
- *  may be transmitted or redistributed to any person without MonetaGo,Inc.’s prior written
- *  consent. This notice may not be deleted or modified without MonetaGo,Inc.’s consent.
- */
-
-//Forgot password styles
-.form-container {
-  margin: auto;
-  height: 100%;
-
-  text-align: -webkit-center;
-
-  .form-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    // width: 55%;
-    height: 100%;
-
-    .forgot-password-header {
-      margin-top: 20%;
-
-      font-size: 32px;
-      font-weight: 400;
-      letter-spacing: 0;
-
-      color: #182e58;
-
-      opacity: 1;
-    }
-
-    .header-message {
-      font-size: 15px;
-
-      letter-spacing: 0;
-      color: #25679d;
-
-      opacity: 1;
-    }
-    .forgot-email {
-      margin-top: 5%;
-      width: 380px;
-      height: 50px;
-
-      font-size: 16px;
-      color: #182e58;
-    }
-    .ui.button {
-      margin-top: 11%;
-      margin-right: 0;
-      width: 100%;
-
-      font-size: 13px;
-      font-weight: 500;
-
-      color: #fff;
-
-      background-color: #25679d;
-    }
-  }
-}
-//end of forgot password styles
+/**Copyright 2020 MonetaGo, Inc.  All Rights Reserved.
+*  This code is copyrighted material that is confidential andproprietary to MonetaGo, Inc.
+*  and may not (in whole or in part) be published, publicly displayed,copied, modified or
+*  used in any way other than as expressly permitted in a writtenagreement executed by
+*  MonetaGo, Inc.  No portion of this code may be used to createderivative works or exploited
+*  in any other way without MonetaGo, Inc.’s prior written consent.  Noportion of this code
+*  may be transmitted or redistributed to any person without MonetaGo,Inc.’s prior written
+*  consent. This notice may not be deleted or modified without MonetaGo,Inc.’s consent.
+*/
 
 .login {
   height: 100vh;
@@ -79,92 +19,68 @@
   }
 
   .logo {
-    margin-bottom: 70px;
+    margin-bottom: 80px;
   }
 
   .login-form {
-    h2 {
-      font-size: 32px;
-      font-weight: 400;
-      letter-spacing: 0;
-      color: #182e58;
-
-      opacity: 1;
+    margin: 0 auto;
+    width: 400px;
+    
+    &-title {
+      margin: 0;
     }
-    p {
-      margin-bottom: 25px;
 
-      font-size: 20px;
-      letter-spacing: 0;
-      color: #25679d;
-
-      opacity: 1;
+    &-subtitle {
+      margin: 20px 0 50px;
     }
 
     .form-field {
-      margin-top: 35px;
-      margin-bottom: 35px;
-
-      border: 1px solid #bfc7d6;
-      border-radius: 5px;
-
-      background: #fff 0% 0% no-repeat padding-box;
-
-      .login-cred {
-        height: 50px;
-
-        font-size: 18px;
-        color: #182e58;
-
-        opacity: 1;
-      }
+      margin-bottom: 50px;
     }
 
-    a {
-      float: left;
-      margin-bottom: 20px;
+    &-link {
+      margin-bottom: 30px;
+      width: 35%;
 
-      font-size: 18px;
-      letter-spacing: 0;
-      color: #182e58;
+      text-align: left;
+    }
 
-      opacity: 1;
+    &-btn {
+      width: 100%;
+      height: 70px;
     }
   }
 
   .login-img {
-    flex-basis: 60%;
+    flex-basis: 55%;
     height: 100%;
 
     background-image: image('../../assets/svg/login-image.svg');
-    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
   }
 
   .login-form-container {
     display: flex;
-    flex-basis: 40%;
+    flex-basis: 45%;
     flex-direction: column;
     justify-content: center;
-    padding: 0 10%;
+
     height: 100%;
 
-    text-align: -webkit-center;
+    text-align: center;
+  }
+}
 
-    .ui.button {
-      width: 100%;
-      height: 60px;
+@include respond-to(lg) {
+  .login {
+    
+    .login-form {
+      width: 315px;
 
-      font-size: 18px;
-
-      letter-spacing: 1.08px;
-
-      color: #fff;
-
-      background-color: #25679d;
-
-      opacity: 1;
+      &-link {
+        width: 45%;
+      }
     }
   }
 }

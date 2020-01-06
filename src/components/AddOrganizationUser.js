@@ -16,7 +16,8 @@ import CommonDropdown from '../common/CommonDropdown'
 
 import CommonButtons from '../common/CommonButton'
 
-const AddOrganizationUser = ({ company }) => {
+const AddOrganizationUser = props => {
+  const { company, showModal } = props
   const [state, setstate] = useState({})
 
   const handleChange = e => {
@@ -29,7 +30,7 @@ const AddOrganizationUser = ({ company }) => {
     setstate({ ...state, role: input })
   }
 
-  const create_user = () => {
+  const createUser = () => {
     if (state.password === state.confirmPass) {
       console.log('Password matched')
     } else {
@@ -39,7 +40,7 @@ const AddOrganizationUser = ({ company }) => {
 
   return (
     <div className="add-user-container">
-      <div className="add-user-title">Add a User</div>
+      <div className="modal-form-title">Add a User</div>
       {inputs.map((data, i) =>
         data.onContainer ? (
           <div className="fullname-container">
@@ -80,11 +81,15 @@ const AddOrganizationUser = ({ company }) => {
         )
       )}
       <div className="actions">
-        <CommonButtons content="CANCEL" btnClass="cancel-btn" />
+        <CommonButtons
+          content="CANCEL"
+          btnClass="cancel-btn btn-gray"
+          onClick={() => showModal(false)}
+        />
         <CommonButtons
           content="CREATE ACCOUNT"
-          btnClass="create-btn"
-          onClick={create_user}
+          btnClass="create-btn btn-blue"
+          onClick={createUser}
         />
       </div>
     </div>
@@ -130,8 +135,8 @@ const inputs = [
       {
         inputType: CommonInput,
         type: 'text',
-        icon: '',
-        iconPos: 'left',
+        // icon: '',
+        // iconPos: 'left',
         placeholder: 'First name',
         inputStyle: 'halfwidth-inputs',
         required: true,
@@ -140,8 +145,8 @@ const inputs = [
       {
         inputType: CommonInput,
         type: 'text',
-        icon: '',
-        iconPos: 'left',
+        // icon: '',
+        // iconPos: 'left',
         placeholder: 'Last name',
         inputStyle: 'halfwidth-inputs',
         required: true,
@@ -175,8 +180,8 @@ const inputs = [
     onContainer: false,
     inputType: CommonInput,
     type: 'text',
-    icon: '',
-    iconPos: 'left',
+    // icon: '',
+    // iconPos: 'left',
     placeholder: 'Organization name',
     inputStyle: 'fullwidth-inputs',
     required: true,
@@ -186,8 +191,8 @@ const inputs = [
     onContainer: false,
     inputType: CommonInput,
     type: 'text',
-    icon: '',
-    iconPos: 'left',
+    // icon: '',
+    // iconPos: 'left',
     placeholder: 'Group (Optional)',
     inputStyle: 'fullwidth-inputs',
     required: true,
@@ -197,8 +202,8 @@ const inputs = [
     onContainer: false,
     inputType: CommonInput,
     type: 'text',
-    icon: '',
-    iconPos: 'left',
+    // icon: '',
+    // iconPos: 'left',
     placeholder: 'Department (Optional)',
     inputStyle: 'fullwidth-inputs',
     required: true,

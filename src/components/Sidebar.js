@@ -1,4 +1,6 @@
 import React, { Fragment, useState } from 'react'
+import { useSelector } from 'react-redux'
+
 const sidebarMenuAdmin = [
   {
     sidebarItem: [
@@ -18,7 +20,13 @@ const sidebarMenuAdmin = [
 
 const sidebarMenuOrg = [
   {
-    sidebarItem: ['Account']
+    sidebarItem: [
+      {
+        icon: require('../assets/svg/account-icon.svg'),
+        iconActive: require('../assets/svg/account-icon-active.svg'),
+        tabItem: 'Account'
+      }
+    ]
   }
 ]
 
@@ -29,14 +37,23 @@ const sidebarMenuCustomer = [
 ]
 
 const Sidebar = ({ onClickSidebar, activeComponent }) => {
+  const login = useSelector(state => state.log)
   const [navigationTab, setnavigationTab] = useState({ user: 'admin' })
   let activeSidebar = sidebarMenuAdmin
 
-  if (navigationTab.user === 'admin') {
+  // if (navigationTab.user === 'admin') {
+  //   activeSidebar = sidebarMenuAdmin
+  // } else if (navigationTab.user === 'orgAdmin') {
+  //   activeSidebar = sidebarMenuOrg
+  // } else if (navigationTab.user === 'customer') {
+  //   activeSidebar = sidebarMenuCustomer
+  // }
+
+  if (login.orgId === '000') {
     activeSidebar = sidebarMenuAdmin
-  } else if (navigationTab.user === 'orgAdmin') {
+  } else if (login.orgId === '111') {
     activeSidebar = sidebarMenuOrg
-  } else if (navigationTab.user === 'customer') {
+  } else if (login === 'customer') {
     activeSidebar = sidebarMenuCustomer
   }
 
@@ -55,7 +72,7 @@ const Sidebar = ({ onClickSidebar, activeComponent }) => {
                 activeComponent === menu.tabItem ? 'active' : 'inactive'
               }`}
             >
-              <span id={menu.tabItem} className="side-item org-identity-detail">
+              <span id={menu.tabItem} className="side-item">
                 <img
                   src={
                     activeComponent === menu.tabItem

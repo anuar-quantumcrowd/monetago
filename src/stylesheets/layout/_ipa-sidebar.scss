@@ -1,0 +1,65 @@
+.ipa {
+  .sidebar {
+
+    // flex-basis: 15%;
+
+    width: 270px;
+    height: 170vh;
+    max-height: 100%;
+
+    border-right: 1px solid $gray-50;
+
+    box-shadow: none;
+
+    opacity: 1;
+
+    background: #fff 0% 0% no-repeat padding-box;
+
+    .side-item {
+      padding-left: 40px;
+
+      img {
+        padding-right: 15px;
+        margin-left: 10px;
+      }
+    }
+
+    .sidebar-sub-item {
+      padding: 15px 0;
+
+      border-bottom: 1px solid $gray-50;
+
+      @include on-event {
+        cursor: pointer;
+      }
+
+      span {
+        img {
+          vertical-align: middle;
+          margin-right: 14px;
+        }
+      }
+    }
+
+    .active {
+      background-color: $yellow-100;
+
+      span {
+        color: $white;
+      }
+    }
+  }
+
+
+  @include respond-to(lg) {
+    .sidebar {
+      flex-basis: 25%;
+    }
+  }
+
+  @media only screen and (min-width: 1200px) and (max-width: 1440px) {
+    .sidebar {
+      flex-basis: 20%;
+    }
+  }
+}

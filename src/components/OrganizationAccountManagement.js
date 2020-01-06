@@ -32,7 +32,7 @@ const OrganizationAccountManagement = () => {
         innerTab={innerTab}
       />
       {innerTab === 'User' ? (
-        <UserTable content={data.selectedOrg} />
+        <UserTable type="Organization" content={data.selectedOrg} />
       ) : innerTab === 'Identity' ? (
         <CorporateIdentity />
       ) : null}

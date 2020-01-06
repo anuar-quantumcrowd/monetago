@@ -1,8 +1,9 @@
 .sidebar {
 
-  flex-basis: 15%;
+  // flex-basis: 15%;
 
-  height: 100vh;
+  width: 280px;
+  height: 170vh;
   max-height: 100%;
 
   box-shadow: 0 8px 40px #7989a833;
@@ -14,6 +15,8 @@
   .sidebar-title {
     padding: 30px 0 30px 40px;
 
+    color: $gray-300;
+
     border-bottom: 1px solid $gray-50;
 
     img {
@@ -23,6 +26,11 @@
 
   .side-item {
     padding-left: 40px;
+
+    font-family: $font-segoe-ui;
+    font-size: 16px;
+    font-weight: 600;
+    color: $gray-300;
   }
 
   .sidebar-sub-item {
@@ -45,5 +53,18 @@
     span {
       color: $white;
     }
+  }
+}
+
+
+@include respond-to(lg) {
+  .sidebar {
+    flex-basis: 25%;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1440px) {
+  .sidebar {
+    flex-basis: 20%;
   }
 }

@@ -41,6 +41,20 @@ body {
   color: $blue-200;
 }
 
+.form-subtitle-sm {
+  @extend .segoe-regular;
+  font-size: 16px;
+  color: $blue-200;
+}
+
+.form-link-text {
+  @extend .segoe-regular;
+  font-size: 18px;
+  color: $blue-100;
+
+  cursor: pointer;
+}
+
 .content-title {
   @extend .segoe-regular;
   font-size: 28px;
@@ -98,5 +112,13 @@ body {
 .org-identity-detail {
   @extend .segoe-regular;
   font-size: 16px;
+  color: $blue-100;
+}
+
+.modal-form-title {
+  @extend .segoe-regular;
+  margin-bottom: 20px;
+
+  font-size: 28px;
   color: $blue-100;
 }

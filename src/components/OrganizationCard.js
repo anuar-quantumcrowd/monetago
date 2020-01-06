@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { orgActiveStep, orgProfile } from '../redux'
+import { orgProfile } from '../redux'
 import { Icon, Popup } from 'semantic-ui-react'
 
 const actions = [
@@ -35,35 +35,6 @@ const OrganizationCard = () => {
               >
                 {item.status}
               </span>
-              {/* <Popup
-                trigger={<Icon name="ellipsis horizontal" />}
-                on="click"
-                pinned
-                basic
-                position="top left"
-                content={
-                  <div className="org-card-option-wrapper">
-                    <div className="org-card-option popup-option-text">
-                      <img
-                        src={require('../assets/svg/settings.svg')}
-                        alt="Settings"
-                      />
-                      <span className="org-card-option-txt">Manage Users</span>
-                    </div>
-                    <div className="org-card-option popup-option-text">
-                      <img src={require('../assets/svg/edit.svg')} alt="Edit" />
-                      <span className="org-card-option-txt">Edit Identity</span>
-                    </div>
-                    <div className="org-card-option popup-option-text-del">
-                      <img
-                        src={require('../assets/svg/delete.svg')}
-                        alt="Delete"
-                      />
-                      <span className="org-card-option-txt">Delete</span>
-                    </div>
-                  </div>
-                }
-              /> */}
               <Popup
                 className="action-popup"
                 trigger={<Icon name="ellipsis horizontal" />}

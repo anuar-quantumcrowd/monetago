@@ -13,3 +13,9 @@
   right: 0;
   bottom: 0;
 }
+
+@include respond-to(lg) {
+  .ui.small.modal {
+    width: 450px;
+  }
+}

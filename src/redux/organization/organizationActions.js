@@ -13,13 +13,23 @@ import {
   ORG_PROFILE,
   SORT_ADMIN_TABLE,
   FILTER_ADMIN_TABLE,
-  CHECKBOX_SELECT_USER
+  CHECKBOX_SELECT_USER,
+  ORG_ACCOUNT
 } from './organizationTypes'
 
 export const orgActiveStep = currStep => {
   return {
     type: ORG_ACTIVE_STEP,
     activeStep: currStep
+  }
+}
+
+export const orgAccount = (data, organization) => {
+  return {
+    type: ORG_ACCOUNT,
+    // activeStep: currStep,
+    data: data,
+    orgName: organization
   }
 }
 
@@ -32,9 +42,10 @@ export const orgProfile = (currStep, data, organization) => {
   }
 }
 
-export const sortBy = (sortType = '', orgName) => {
+export const sortBy = (tableType, sortType = '', orgName) => {
   return {
     type: SORT_ADMIN_TABLE,
+    tableType: tableType,
     sortType: sortType,
     orgName: orgName
   }
@@ -47,9 +58,10 @@ export const filterBy = e => {
   }
 }
 
-export const userCheckbox = (id, orgName) => {
+export const userCheckbox = (tableType, id, orgName) => {
   return {
     type: CHECKBOX_SELECT_USER,
+    tableType: tableType,
     checkedUser: id,
     orgName: orgName
   }

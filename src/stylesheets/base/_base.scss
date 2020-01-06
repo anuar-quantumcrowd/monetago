@@ -16,6 +16,11 @@
   box-sizing: border-box;
 }
 
+.disabled {
+  border: none !important;
+
+  pointer-events: none;
+}
 a,
 button {
   cursor: pointer;
@@ -66,4 +71,31 @@ textarea {
   }
 
   @include appearance(none);
+}
+
+//Semantic UI
+.ui.dimmer {
+  background-color: $blue-700;
+}
+
+.ui.selection.dropdown {
+  font-size: 16px;
+  line-height: 24px;
+  color: $blue-100;
+
+  & > .dropdown.icon {
+    padding: 16px;
+  }
+}
+
+.ui.input {
+  & > input {
+    color: $blue-100;
+
+    @include on-event {
+      color: $blue-100;
+
+      border-color: $gray-100 !important;
+    }
+  }
 }

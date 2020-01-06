@@ -14,16 +14,34 @@ import { Modal } from 'semantic-ui-react'
 
 import CommonButtons from '../common/CommonButton'
 
-const MainModal = ({ btnTitle, children, icon = '', btnClass }) => {
+const MainModal = ({
+  btnTitle,
+  children,
+  icon = '',
+  btnClass,
+  img = '',
+  trigger = (
+    <CommonButtons
+      content={btnTitle}
+      image={img}
+      icon={icon}
+      btnClass={btnClass}
+    />
+  ),
+  open = false,
+  onClose,
+  onOpen
+}) => {
   return (
     <Modal
-      trigger={
-        <CommonButtons content={btnTitle} icon={icon} btnClass={btnClass} />
-      }
+      open={open}
+      trigger={trigger}
+      onClose={onClose}
+      onOpen={onOpen}
       className="main-modal"
       size="small"
       closeIcon={{
-        style: { top: '0.5rem', right: '0.5rem', fontSize: '14px' },
+        style: { top: '20px', right: '20px', fontSize: '20px' },
         color: 'black',
         name: 'close'
       }}

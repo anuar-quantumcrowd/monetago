@@ -13,7 +13,8 @@ import {
   ORG_PROFILE,
   SORT_ADMIN_TABLE,
   FILTER_ADMIN_TABLE,
-  CHECKBOX_SELECT_USER
+  CHECKBOX_SELECT_USER,
+  ORG_ACCOUNT
 } from './organizationTypes'
 
 const initialState = {
@@ -22,6 +23,24 @@ const initialState = {
   selectedOrg: '',
   ascending: false,
   selectAll: false,
+  accounts: {
+    users: [
+      {
+        userId: 'user09812',
+        password: '000',
+        orgId: '000',
+        firstName: 'Anuar',
+        lastName: 'Ditucalan',
+        email: 'anuarditucalan@gmail.com',
+        phoneNumber: '+63519 862 7612',
+        group: 'Group 1',
+        role: 'Admin',
+        active: true,
+        selected: false
+      }
+    ]
+  },
+
   activeStep: 'organizationCardList',
   column: ['userId', 'name', 'email', 'phoneNumber', 'group', 'role', 'active'],
   filterOptions: [
@@ -137,10 +156,13 @@ const initialState = {
       avatar: 'AB',
       name: 'AMCE Bldg Supply LTD',
       info: 'AMCE Building Supply',
+      orgId: '111',
       type: 'Issuer',
       users: [
         {
-          userId: 'user0981',
+          userId: 'user09811',
+          password: '111',
+          orgId: '111',
           firstName: 'John',
           lastName: 'Doe',
           email: 'johndoe@gmail.com',
@@ -157,10 +179,13 @@ const initialState = {
       avatar: 'JC',
       name: 'JC Supply PTY',
       info: 'Construction Supply',
+      orgId: '112',
       type: 'Investor',
       users: [
         {
-          userId: 'user0981',
+          userId: 'user09812',
+          password: '112',
+          orgId: '112',
           firstName: 'John',
           lastName: 'Doe',
           email: 'johndoe@gmail.com',
@@ -171,7 +196,9 @@ const initialState = {
           selected: false
         },
         {
-          userId: 'user09825861',
+          userId: 'user098258613',
+          password: '112',
+          orgId: '112',
           firstName: 'Richardson',
           lastName: 'Vandelier',
           email: 'richardson.vandelier@gmail.com',
@@ -188,10 +215,13 @@ const initialState = {
       avatar: 'DK',
       name: 'DK Solutions',
       info: 'Solutions Company',
+      orgId: '113',
       type: 'IPA',
       users: [
         {
-          userId: 'user0981',
+          userId: 'user09814',
+          password: '113',
+          orgId: '113',
           firstName: 'John',
           lastName: 'Doe',
           email: 'johndoe@gmail.com',
@@ -202,7 +232,9 @@ const initialState = {
           selected: false
         },
         {
-          userId: 'user09825861',
+          userId: 'user098258615',
+          password: '113',
+          orgId: '113',
           firstName: 'Richardson',
           lastName: 'Vandelier',
           email: 'richardson.vandelier@gmail.com',
@@ -213,7 +245,9 @@ const initialState = {
           selected: false
         },
         {
-          userId: 'user098252',
+          userId: 'user0982526',
+          password: '113',
+          orgId: '113',
           firstName: 'Thomas',
           lastName: 'Col',
           email: 'TMCollines@gmail.com',
@@ -230,10 +264,13 @@ const initialState = {
       avatar: 'JC',
       name: 'JC Supply PTY',
       info: 'Construction Supply',
+      orgId: '114',
       type: 'Investor',
       users: [
         {
-          userId: 'user0981',
+          userId: 'user09817',
+          password: '114',
+          orgId: '114',
           firstName: 'John',
           lastName: 'Doe',
           email: 'johndoe@gmail.com',
@@ -244,7 +281,9 @@ const initialState = {
           selected: false
         },
         {
-          userId: 'user09825861',
+          userId: 'user098258618',
+          password: '114',
+          orgId: '114',
           firstName: 'Richardson',
           lastName: 'Vandelier',
           email: 'richardson.vandelier@gmail.com',
@@ -255,7 +294,9 @@ const initialState = {
           selected: false
         },
         {
-          userId: 'user098252',
+          userId: 'user0982529',
+          password: '114',
+          orgId: '114',
           firstName: 'Thomas',
           lastName: 'Col',
           email: 'TMCollines@gmail.com',
@@ -266,7 +307,9 @@ const initialState = {
           selected: false
         },
         {
-          userId: 'user09825361',
+          userId: 'user0982536110',
+          password: '114',
+          orgId: '114',
           firstName: 'Raven',
           lastName: 'Dutch',
           email: 'raven.dutch@gmail.com',
@@ -283,10 +326,13 @@ const initialState = {
       avatar: 'JC',
       name: 'JC Supply PTY',
       info: 'Construction Supply',
+      orgId: '115',
       type: 'Investor',
       users: [
         {
-          userId: 'user0981',
+          userId: 'user098111',
+          password: '115',
+          orgId: '115',
           firstName: 'John',
           lastName: 'Doe',
           email: 'johndoe@gmail.com',
@@ -297,7 +343,9 @@ const initialState = {
           selected: false
         },
         {
-          userId: 'user09825861',
+          userId: 'user0982586112',
+          password: '115',
+          orgId: '115',
           firstName: 'Richardson',
           lastName: 'Vandelier',
           email: 'richardson.vandelier@gmail.com',
@@ -308,7 +356,9 @@ const initialState = {
           selected: false
         },
         {
-          userId: 'user098252',
+          userId: 'user09825213',
+          password: '115',
+          orgId: '115',
           firstName: 'Thomas',
           lastName: 'Col',
           email: 'TMCollines@gmail.com',
@@ -319,7 +369,9 @@ const initialState = {
           selected: false
         },
         {
-          userId: 'user09825361',
+          userId: 'user0982536114',
+          password: '115',
+          orgId: '115',
           firstName: 'Raven',
           lastName: 'Dutch',
           email: 'raven.dutch@gmail.com',
@@ -330,7 +382,9 @@ const initialState = {
           selected: false
         },
         {
-          userId: 'user09825327',
+          userId: 'user0982532715',
+          password: '115',
+          orgId: '115',
           firstName: 'James',
           lastName: 'Bond',
           email: 'james.bond@gmail.com',
@@ -345,11 +399,20 @@ const initialState = {
   ]
 }
 
+initialState.organization.map(org => {
+  org.users.map(user => {
+    user.organizationName = org.name
+    initialState.accounts.users.push(user)
+  })
+})
+
 const sortData = (state, action) => {
   let self = state.ascending
+  let dataToSort =
+    action.tableType === 'Account' ? state.accounts : state.selectedOrg
   self = !self
 
-  state.selectedOrg.users.sort((a, b) => {
+  dataToSort.users.sort((a, b) => {
     return a[state.sortBy] < b[state.sortBy]
       ? self
         ? 1
@@ -364,30 +427,32 @@ const sortData = (state, action) => {
 
 const selectedUsers = (state, action) => {
   let selectedArr = []
+  let dataToSelect =
+    action.tableType === 'Account' ? state.accounts : state.selectedOrg
 
   if (action.checkedUser === 'All') {
     state.selectAll = !state.selectAll
 
-    state.selectedOrg.users.find(arr => {
+    dataToSelect.users.find(arr => {
       state.selectAll ? (arr.selected = true) : (arr.selected = false)
     })
   } else {
-    state.selectedOrg.users.find(arr => {
+    dataToSelect.users.find(arr => {
       if (arr.userId === action.checkedUser) {
         arr.selected = !arr.selected
       }
     })
   }
 
-  state.selectedOrg.users.map(data => {
+  dataToSelect.users.map(data => {
     return data.selected ? selectedArr.push(data.userId) : null
   })
 
-  selectedArr.length === state.selectedOrg.users.length
+  selectedArr.length === dataToSelect.users.length
     ? (state.selectAll = true)
     : (state.selectAll = false)
 
-  return state.selectedOrg.users
+  return dataToSelect.users
 }
 
 export const organizationReducer = (state = initialState, action) => {
@@ -396,6 +461,12 @@ export const organizationReducer = (state = initialState, action) => {
       return {
         ...state,
         activeStep: action.activeStep
+      }
+
+    case ORG_ACCOUNT:
+      return {
+        ...state,
+        selectedOrg: action.orgName
       }
 
     case ORG_PROFILE:
@@ -412,7 +483,10 @@ export const organizationReducer = (state = initialState, action) => {
         sortBy: action.sortType,
         selectedOrg: {
           name: state.selectedOrg.name,
-          users: state.selectedOrg.users.sort(sortData(state, action))
+          users:
+            action.tableType === 'Account'
+              ? state.accounts.users.sort(sortData(state, action))
+              : state.selectedOrg.users.sort(sortData(state, action))
         }
       }
 

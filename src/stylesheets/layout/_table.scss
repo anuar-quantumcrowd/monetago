@@ -9,41 +9,17 @@
  */
 
 .admin-table-wrapper {
+  margin-bottom: 30px;
+
   .search-input {
-    margin: 40px 0;
-    width: 35%;
+    margin-bottom: 40px;
+
+    // width: 35%;
+    width: 460px;
   }
 
-  .table {
-    &-details {
-      display: flex;
-      justify-content: space-between;
-    }
-
-    &-page {
-      p {
-        margin: auto 20px;
-        margin-top: 13px;
-
-        .prev-icon {
-          padding-bottom: 1px;
-          margin-right: 10px;
-          width: 10px;
-
-          cursor: pointer;
-        }
-
-        .next-icon {
-          padding-bottom: 1px;
-          margin-left: 10px;
-          width: 10px;
-
-          cursor: pointer;
-
-          transform: rotate(180deg);
-        }
-      }
-    }
+  .table-wrapper {
+    overflow-x: scroll;
   }
 
   .ui.table {
@@ -106,6 +82,46 @@
 
       & .inactive {
         background-color: $gray-400;
+      }
+    }
+  }
+}
+
+
+@include respond-to(lg-up) {
+  .admin-table-wrapper {
+    .table {
+      &-filter {
+        p { width: 100%; }
+
+        .ui.selection.dropdown {
+          margin: 10px;
+        }
+      }
+
+      &-filter-page p {
+        width: 100%;
+      }
+    }
+  }
+}
+
+
+@include respond-to(lg-down) {
+  .admin-table-wrapper {
+    .table {
+      &-filter {
+        flex-wrap: wrap;
+
+        p { width: 100%; }
+
+        .ui.selection.dropdown {
+          margin: 10px;
+        }
+      }
+
+      &-filter-page, &-filter-page p {
+        width: 100%;
       }
     }
   }

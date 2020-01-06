@@ -9,7 +9,7 @@
  */
 
 import React from 'react'
-import { Icon } from 'semantic-ui-react'
+import { Icon, Popup } from 'semantic-ui-react'
 
 const MainNavbar = () => {
   return (
@@ -18,11 +18,31 @@ const MainNavbar = () => {
         <div>
           <img src={require('../assets/svg/main-navbar-logo.svg')} alt="Logo" />
         </div>
-        <div className="navbar-user-wrapper">
-          <div className="navbar-user-avatar">AN</div>
-          <div className="navbar-user-name">Admin Name</div>
-          <Icon name="dropdown" />
-        </div>
+        <Popup
+          trigger={
+            <div className="navbar-user-wrapper">
+              <div className="navbar-user-avatar">AN</div>
+              <div className="navbar-user-name">Admin Name</div>
+              <Icon name="dropdown" />
+            </div>
+          }
+          on="click"
+          pinned
+          basic
+          position="bottom left"
+          content={
+            <div className="menu-wrapper">
+              <div
+                className="menu-item"
+                onClick={() => {
+                  window.location.href = '/#/'
+                }}
+              >
+                Logout
+              </div>
+            </div>
+          }
+        />
       </div>
     </div>
   )

@@ -1,0 +1,50 @@
+.ui.centered.four.cards {
+  padding: 7em 3em;
+}
+
+.ui.card,
+.ui.cards > .card {
+  background-color: #f3f3f3;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.ui.card > .content p,
+.ui.cards > .card > .content p {
+  margin: .5em 0;
+}
+
+.ui.card {
+  padding: 2em 1em;
+
+  &:hover {
+    background-color: $blue-100;
+
+    .cardHead,
+    .cardFoot {
+      color: #fff;
+    }
+    .cardDesc {
+      color: #f9b214;
+    }
+  }
+
+  .cardHead {
+    font-family: $font-opensans;
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  .cardDesc {
+    font-family: $font-opensans;
+    font-size: 35px;
+    font-weight: 700;
+    color: $blue-300;
+  }
+
+  .cardFoot {
+    font-family: $font-opensans;
+    font-size: 16px;
+    font-weight: 700;
+  }
+}

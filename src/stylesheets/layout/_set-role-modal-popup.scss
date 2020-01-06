@@ -7,24 +7,16 @@
   transform: translate(0, -50%);
 }
 .set-role-content {
-  display: flex;
-  flex-direction: column;
+  padding: 40px !important;
 
-  p {
-    font-size: 28px;
-    color: #182e58;
-    text-align: left;
-
-    opacity: 1;
+  .modal-form-title {
+    margin-bottom: 10px;
   }
+
   .dropdown-select-role {
-    margin-top: -3%;
-    height: 50px;
-
-    font-size: 18px;
-    letter-spacing: 0;
-    color: #182e58;
+    width: 100%;
   }
+
   .btn-container {
     margin-top: 20px;
     width: 100%;
@@ -33,32 +25,42 @@
 
     .btn-cancel {
       margin-right: 10px;
-      width: 150px;
-      height: 50px;
-
-      font-size: 14px;
+      width: 140px;
     }
+
     .btn-save {
-      margin-right: 0;
-      width: 150px;
-      height: 50px;
-
-      font-size: 14px;
-      color: #fff;
-
-      background-color: #2874ad;
+      width: 200px;
     }
   }
 }
-.ui.modal > .content {
-  display: flex;
-  flex-direction: column;
-  padding: 7% 9%;
-}
 
-@media only screen and (min-width: 1200px) {
-  .ui.mini.modal {
-    margin: 0;
-    width: 500px;
+@include respond-to(lg) {
+  .ui.tiny.modal.transition.visible.active {
+    width: 335px;
+  }
+
+  .set-role-content {
+    .modal-form-title {
+      font-size: 23px;
+    }
+    .dropdown-select-role {
+      height: 40px;
+
+      font-size: 16px;
+    }
+    .btn-container {
+      .btn-cancel {
+        width: 100px;
+        height: 40px;
+
+        font-size: 12px;
+      }
+      .btn-save {
+        width: 130px;
+        height: 40px;
+
+        font-size: 12px;
+      }
+    }
   }
 }

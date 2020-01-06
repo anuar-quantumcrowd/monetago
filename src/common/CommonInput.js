@@ -14,6 +14,7 @@ import { Input } from 'semantic-ui-react'
 const CommonInput = ({
   onChange,
   onClick = null,
+  onBlur,
   name,
   type = 'text',
   background,
@@ -21,24 +22,29 @@ const CommonInput = ({
   inputStyle = '',
   placeholder = '',
   icon = '',
-  iconPosition = null,
-  required = false
+  iconPosition,
+  required = false,
+  status,
+  statusMessage
 }) => {
   return (
     <div className="input-wrapper">
-      <Input
-        onClick={onClick}
-        onChange={onChange}
-        name={name}
-        type={type}
-        value={value}
-        icon={icon}
-        iconPosition="left"
-        placeholder={placeholder}
-        iconPosition={iconPosition}
-        className={`input-${background} ${inputStyle}`}
-        required={required}
-      />
+      <div className={status === false ? 'input-error' : null}>
+        <Input
+          name={name}
+          type={type}
+          value={value}
+          icon={icon}
+          placeholder={placeholder}
+          iconPosition={iconPosition}
+          className={`input-${background} ${inputStyle}`}
+          required={required}
+          onClick={onClick}
+          onChange={onChange}
+          onBlur={onBlur}
+        />
+      </div>
+      {status === false && <div className="input-message">{statusMessage}</div>}
     </div>
   )
 }

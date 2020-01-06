@@ -8,7 +8,7 @@
  *  consent. This notice may not be deleted or modified without MonetaGo,Inc.’s consent.
  */
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Image, Popup, Icon, Modal } from 'semantic-ui-react'
 import CommonInput from '../common/CommonInput'
 import CommonButtons from '../common/CommonButton'
@@ -42,21 +42,10 @@ const roles = [
   }
 ]
 
-const EditUserOnAccount = ({
-  status,
-  userID,
-  firstName,
-  lastName,
-  password,
-  email,
-  phoneNumber,
-  organiztion,
-  department,
-  group,
-  role
-}) => {
+const EditUserOnAccount = props => {
+  const [userData, setUserData] = useState(props)
   const [openPopup, setopenPopup] = useState(false)
-
+  const [showReset, setShowReset] = useState(false)
   const [openSetRoleModal, setopenSetRoleModal] = useState(false)
   const [openDeactivateModal, setopenDeactivateModal] = useState(false)
 
@@ -64,9 +53,9 @@ const EditUserOnAccount = ({
     setopenPopup(!openPopup)
   }
 
-  const handleClose = () => {
+  const handleClose = bool => {
     setopenPopup(!openPopup)
-    setopenSetRoleModal(!openSetRoleModal)
+    if (bool) setopenSetRoleModal(!openSetRoleModal)
   }
 
   const handleCloseModal = () => {
@@ -81,6 +70,24 @@ const EditUserOnAccount = ({
   const handleCloseDeactivateModal = () => {
     setopenDeactivateModal(!openDeactivateModal)
   }
+
+  const showResetter = e => {
+    setShowReset(true)
+    if (e.target.value === '') {
+      setShowReset(false)
+    }
+  }
+
+  useEffect(() => {
+    if (userData.password !== '') {
+      setShowReset(true)
+    }
+  }, [])
+
+  const resetPassword = () => {
+    console.log('Reset password')
+  }
+
   return (
     <div className="edit-container">
       <div className="edit-header">
@@ -91,11 +98,11 @@ const EditUserOnAccount = ({
               avatar
               className="avatar-icon"
             />
-            <p>{status}</p>
+            <p className="status">{userData.status ? 'Active' : 'Inactive'}</p>
           </div>
-          <div>
-            <h3>{`${firstName} ${lastName}`}</h3>
-            <p>{role}</p>
+          <div className="edit-name-display">
+            <h3>{`${userData.firstName} ${userData.lastName}`}</h3>
+            <p className="role">{userData.role}</p>
           </div>
         </div>
 
@@ -109,7 +116,7 @@ const EditUserOnAccount = ({
             size="tiny"
           >
             <Modal.Content className="set-role-content">
-              <p>Set Role</p>
+              <p className="modal-form-title">Set Role</p>
               <CommonDropdown
                 placeholder="Select a Role"
                 name={roles}
@@ -119,12 +126,12 @@ const EditUserOnAccount = ({
               <div className="btn-container">
                 <CommonButtons
                   content="CANCEL"
-                  btnClass="btn-cancel"
+                  btnClass="btn-cancel btn-gray"
                   onClick={handleCloseModal}
                 />
                 <CommonButtons
                   content="SAVE CHANGES"
-                  btnClass="btn-save"
+                  btnClass="btn-save btn-blue"
                   onClick={handleCloseModal}
                 />
               </div>
@@ -140,16 +147,18 @@ const EditUserOnAccount = ({
             size="tiny"
           >
             <Modal.Content className="delete-content">
-              <p>Are you sure you want to deactivate this user?</p>
+              <p className="modal-form-title">
+                Are you sure you want to deactivate this user?
+              </p>
               <div className="btn-actions">
                 <CommonButtons
                   content="CANCEL"
-                  btnClass="btn-cancel"
+                  btnClass="btn-cancel btn-white"
                   onClick={handleCloseDeactivateModal}
                 />
                 <CommonButtons
                   content="DEACTIVATE"
-                  btnClass="btn-deact"
+                  btnClass="btn-deact btn-blue"
                   onClick={handleCloseDeactivateModal}
                 />
               </div>
@@ -159,11 +168,11 @@ const EditUserOnAccount = ({
             className="action-popup"
             trigger={<Icon link name="ellipsis vertical" />}
             open={openPopup}
-            onClose={handleClose}
+            onClose={() => handleClose(false)}
             onOpen={handleOpen}
             content={
               <div className="action-menu">
-                <p className="actions" onClick={handleClose}>
+                <p className="actions" onClick={() => handleClose(true)}>
                   <img
                     src={require('../assets/svg/settings.svg')}
                     alt="Set Role"
@@ -195,7 +204,6 @@ const EditUserOnAccount = ({
           />
         </div>
       </div>
-      <hr />
 
       <div className="edit-user-container">
         <div className="edit-user-title">Account Details</div>
@@ -205,14 +213,14 @@ const EditUserOnAccount = ({
             iconPosition="right"
             inputStyle="halfwidth-inputs"
             type="text"
-            value={firstName}
+            value={userData.firstName}
           />
           <CommonInput
             icon="pencil"
             iconPosition="right"
             inputStyle="halfwidth-inputs"
             type="text"
-            value={lastName}
+            value={userData.lastName}
           />
         </div>
         <CommonInput
@@ -220,54 +228,65 @@ const EditUserOnAccount = ({
           iconPosition="left"
           inputStyle="fullwidth-inputs"
           type="text"
-          value={userID}
+          value={userData.userId}
         />
-        <CommonInput
-          icon="lock"
-          iconPosition="left"
-          inputStyle="fullwidth-inputs"
-          type="password"
-          value={password}
-        />
+        <div className="edit-password">
+          <CommonInput
+            icon="lock"
+            iconPosition="left"
+            inputStyle="fullwidth-inputs"
+            type="password"
+            value={userData.password}
+            onChange={showResetter}
+          />
+          {showReset ? (
+            <div className="reset">
+              <p onClick={resetPassword}>RESET PASSWORD</p>
+            </div>
+          ) : null}
+        </div>
         <CommonInput
           icon="mail"
           iconPosition="left"
           inputStyle="fullwidth-inputs"
           type="email"
-          value={email}
+          value={userData.email}
         />
         <CommonInput
           icon="mobile alternate"
           iconPosition="left"
           inputStyle="fullwidth-inputs"
-          type="number"
-          value={phoneNumber}
+          type="text"
+          value={userData.phoneNumber}
         />
         <CommonInput
           icon="pencil"
           iconPosition="right"
           inputStyle="fullwidth-inputs"
           type="text"
-          value={organiztion}
+          value={userData.organization}
         />
         <CommonInput
           icon="pencil"
           iconPosition="right"
           inputStyle="fullwidth-inputs"
           type="text"
-          value={group}
+          value={userData.group}
         />
         <CommonInput
           icon="pencil"
           iconPosition="right"
           inputStyle="fullwidth-inputs"
           type="text"
-          value={department}
+          value={userData.department}
         />
 
         <div className="actions">
-          <CommonButtons content="CANCEL" btnClass="cancel-btn" />
-          <CommonButtons content="SAVE CHANGES" btnClass="create-btn" />
+          <CommonButtons content="CANCEL" btnClass="cancel-btn btn-gray" />
+          <CommonButtons
+            content="SAVE CHANGES"
+            btnClass="create-btn btn-blue"
+          />
         </div>
       </div>
     </div>

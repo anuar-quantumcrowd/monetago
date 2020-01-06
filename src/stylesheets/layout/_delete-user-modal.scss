@@ -20,34 +20,44 @@
 .delete-content {
   text-align: center;
 
-  p {
-    margin-bottom: 30px;
-
-    font-size: 28px;
-    font-weight: 500;
-    color: #182e58;
-  }
-
   .btn-actions {
     .btn-cancel {
       margin-right: 30px;
       width: 150px;
       height: 50px;
-
-      font-size: 16px;
     }
+
     .btn-deact {
       width: 150px;
       height: 50px;
-
-      font-size: 16px;
-      color: #fff;
-
-      background-color: #2874ad;
     }
   }
 }
 
 .ui.modal > .content {
   padding: 7% 14%;
+}
+
+@include respond-to(lg) {
+  .delete-content {
+    p {
+      font-size: 21px;
+    }
+
+    .btn-actions {
+      .btn-cancel {
+        margin-right: 15px;
+        width: 110px;
+        height: 40px;
+
+        font-size: 12px;
+      }
+      .btn-deact {
+        width: 110px;
+        height: 40px;
+
+        font-size: 12px;
+      }
+    }
+  }
 }

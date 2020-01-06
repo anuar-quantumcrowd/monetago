@@ -8,15 +8,29 @@
  *  consent. This notice may not be deleted or modified without MonetaGo,Inc.’s consent.
  */
 
-import React from 'react'
-import ResetPassword from './ResetPassword'
+import React, { useState } from 'react'
 
-import LoginPage from './LoginPage'
+import LoginForm from './LoginForm'
+import ForgotPassword from './ForgotPassword'
 
 const Login = () => {
+  const [loginStep, setLoginStep] = useState('loginForm')
+
+  const loginComponents = {
+    loginForm: LoginForm,
+    forgotPassword: ForgotPassword
+  }
+
+  const ActiveComponent = loginComponents[loginStep]
+
   return (
     <div className="login">
-      <LoginPage />
+      <div className="login-container">
+        <div className="login-img"></div>
+        <div className="login-form-container">
+          <ActiveComponent loginStep={setLoginStep} />
+        </div>
+      </div>
     </div>
   )
 }

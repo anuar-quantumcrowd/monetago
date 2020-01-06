@@ -12,15 +12,18 @@ import { userConstants } from './userTypes'
 
 const initialState = {
   logIn: false,
-  user: ''
+  user: '',
+  orgId: ''
 }
+
 export const auth = (state = initialState, action) => {
   switch (action.type) {
     case userConstants.USER_LOGIN_REQUEST: {
       return { loggingIn: true }
     }
+
     case userConstants.USER_LOGIN_SUCCESS: {
-      return { loggedIn: true, user: action.payload }
+      return { loggedIn: true, user: action.user, orgId: action.orgId }
     }
     default:
       return state

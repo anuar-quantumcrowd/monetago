@@ -18,19 +18,23 @@
   &-wrapper {
     display: flex;
     flex-wrap: wrap;
+    width: 100%;
   }
 
   &-item {
     padding: 10px;
     margin: 0 25px 25px 0;
 
-    width: 260px;
-
-    // width: auto;
-    height: 280px;
+    // width: 260px;
+    width: 18.6%;
+    min-height: 280px;
 
     border: 1px solid $gray-100;
     border-radius: 5px;
+
+    &:nth-child(5n) {
+      margin-right: 0;
+    }
   }
 
   &-header {
@@ -119,22 +123,37 @@
   &-user-wrapper {
     @extend .flex-content;
   }
+}
 
-  // &-option-wrapper {
-  //   padding: 20px 15px;
-  // }
+@media (min-width: 1200px) and (max-width: 1830px) {
+  .org-card {
+    &-item {
+      width: 31.2%;
 
-  // &-option {
-  //   margin-bottom: 15px;
+      &:nth-child(3n) {
+        margin-right: 0;
+      }
 
-  //   cursor: pointer;
+      &:nth-child(5n) {
+        margin: 0 25px 25px 0;
+      }
+    }
+  }
+}
 
-  //   &:last-child {
-  //     margin-bottom: 0;
-  //   }
-  // }
+@include respond-to(lg) {
+  .org-card {
+    &-item {
+      width: 48%;
 
-  // &-option-txt {
-  //   margin-left: 8px;
-  // }
+      &:nth-child(2n) {
+        margin-right: 0;
+      }
+
+      &:nth-child(3n),
+      &:nth-child(5n) {
+        margin: 0 25px 25px 0;
+      }
+    }
+  }
 }

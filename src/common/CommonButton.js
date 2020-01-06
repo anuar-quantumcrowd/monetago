@@ -18,7 +18,8 @@ const CommonButtons = ({
   btnClass,
   type = 'button',
   icon = '',
-  image = ''
+  image = '',
+  disabled
 }) => {
   return (
     <Fragment>
@@ -26,6 +27,7 @@ const CommonButtons = ({
         onClick={onClick}
         type={type}
         className={`btn-${background} ${btnClass}`}
+        disabled={disabled}
       >
         {image ? <img src={image} alt="img" /> : ''}
         {icon ? <Icon name={icon} /> : ''}

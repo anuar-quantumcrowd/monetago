@@ -8,14 +8,12 @@
  *  consent. This notice may not be deleted or modified without MonetaGo,Inc.’s consent.
  */
 
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { orgActiveStep } from '../redux'
 import { Image } from 'semantic-ui-react'
 import MainModal from '../components/MainModal'
 import AddUserOnAccountTab from './AddUserOnAccountTab'
-import EditUserOnAccount from './EditUserOnAccount'
-import EditUserOnOrganization from './EditUserOnOrganization'
 import AddNewOrganization from './AddNewOrganization'
 import AddOrganizationUser from './AddOrganizationUser'
 
@@ -27,11 +25,16 @@ const ContentHeader = ({
   info,
   orgType
 }) => {
-  // const back = () => {
-  //   window.history.back()
-  // }
-
+  const [showModal, setShowModal] = useState(false)
   const dispatch = useDispatch()
+
+  const closeModal = () => {
+    setShowModal(false)
+  }
+
+  const openModal = () => {
+    setShowModal(true)
+  }
 
   return (
     <div className="content-header-container">
@@ -49,18 +52,28 @@ const ContentHeader = ({
 
       <div className="main-header">
         <p>{contentHeaderTitle}</p>
-        <MainModal btnTitle={btnContent} icon={icon} btnClass="add-user-btn">
-          {/* <EditUserOnOrganization /> */}
-
+        <MainModal
+          btnTitle={btnContent}
+          icon={icon}
+          btnClass="add-user-btn"
+          open={showModal}
+          onClose={closeModal}
+          onOpen={openModal}
+        >
           {btnContent === 'Add Organization' ? (
-            <AddNewOrganization />
+            <AddNewOrganization showModal={setShowModal} />
           ) : btnContent === 'Add User' && type === 'cards' ? (
-            <AddOrganizationUser company={contentHeaderTitle} />
+            <AddOrganizationUser
+              showModal={setShowModal}
+              company={contentHeaderTitle}
+            />
           ) : btnContent === 'Add User' ? (
-            <AddUserOnAccountTab />
-          ) : btnContent === 'Edit User' ? (
-            <EditUserOnAccount />
-          ) : null}
+            <AddUserOnAccountTab showModal={setShowModal} />
+          ) : 
+          // btnContent === 'Edit User' ? (
+          //   <EditUserOnAccount />
+          // ) : 
+          null}
         </MainModal>
       </div>
       {type === 'cards' ? (
@@ -72,7 +85,7 @@ const ContentHeader = ({
           </div>
         </div>
       ) : type === 'OrgAndAcct' ? (
-        <hr />
+        <div className="content-header-line"></div>
       ) : null}
     </div>
   )

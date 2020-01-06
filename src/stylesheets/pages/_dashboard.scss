@@ -1,22 +1,23 @@
 .dashboard {
   display: flex;
 
-  &-account {    
-    margin: 80px;
+  &-account {
+    margin: 60px 80px 0;
 
     animation-name: fadeIn;
     animation-duration: .5s;
   }
 
   &-org {
-    margin: 80px;
+    margin: 60px 80px 0;
 
     animation-name: fadeIn;
     animation-duration: .5s;
   }
 
   &-content {
-    flex-basis: 85%;
+    // flex-basis: 85%;
+    width: 100%;
 
     animation-name: fadeIn;
     animation-duration: .3s;
@@ -27,3 +28,22 @@
   animation-name: fadeIn;
   animation-duration: .5s;
 }
+
+@media only screen and (min-width: 1200px) and (max-width: 1440px) {
+  .dashboard {
+    &-content {
+      flex-basis: 80%;
+      overflow-x: hidden;
+    }
+  }
+}
+
+@include respond-to(lg) {
+  .dashboard {
+    &-content {
+      overflow-x: hidden;
+
+    }
+  }
+}
+

@@ -60,3 +60,26 @@
     }
   }
 }
+
+.menu-wrapper {
+  padding: 8px 0;
+  width: 155px;
+
+  .menu-item {
+    padding: 6px 8px;
+
+    font-family: $font-segoe-ui;
+    font-size: 16px;
+    font-weight: 400;
+    color: $blue-100;
+
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+    
+    &:hover {
+      color: $white;
+
+      background-color: $blue-500;
+    }
+  }
+}

@@ -30,7 +30,6 @@ module.exports = {
     'declaration-block-trailing-semicolon': 'always',
     'declaration-colon-space-after': 'always',
     'declaration-colon-space-before': 'never',
-    'declaration-no-important': true,
     'font-family-no-duplicate-names': true,
     'font-weight-notation': 'numeric',
     'function-calc-no-invalid': true,

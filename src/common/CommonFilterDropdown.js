@@ -34,6 +34,7 @@ const CommonFilterDropdown = ({ options }) => {
             name={filter.name}
             placeholder={filter.placeholder}
             options={filter.options}
+            dropdownClass="table-filter-dropdown"
             onChange={e => dispatch(filterBy(e))}
           />
         )

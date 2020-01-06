@@ -13,8 +13,16 @@ import { userConstants } from './userTypes'
 export const login = (username, password) => {
   return dispatch => {
     dispatch(request())
-    if (username === 'admin' && password == 'admin') {
-      dispatch(success(username))
+
+    if (username === 'monetagoadmin' && password == '000') {
+      const orgId = '000'
+      dispatch(success(orgId, username))
+      window.location.href = '#/dashboard'
+    } else if (username === 'orgadmin' && password == '111') {
+      const orgId = '111'
+      window.location.href = '#/dashboard'
+
+      dispatch(success(orgId, username))
     }
   }
 }
@@ -23,6 +31,6 @@ const request = () => {
   return { type: userConstants.USER_LOGIN_REQUEST }
 }
 
-const success = user => {
-  return { type: userConstants.USER_LOGIN_SUCCESS, payload: user }
+const success = (orgId, user) => {
+  return { type: userConstants.USER_LOGIN_SUCCESS, user: user, orgId: orgId }
 }

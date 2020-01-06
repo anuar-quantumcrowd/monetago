@@ -16,8 +16,11 @@ import NoRouteMatch from './pages/404'
 import Login from './pages/login'
 import Dashboard from './pages/dashboard'
 import MainNavbar from './components/MainNavbar'
+import IPADashboard from './pages/users/dashboard'
+import IPAMainNavbar from './usersComponents/MainNavbar'
 import 'semantic-ui-css/semantic.min.css'
 import './stylesheets/main.scss'
+import IPALogin from './pages/users/login'
 
 class App extends Component {
   render() {
@@ -39,7 +42,20 @@ class App extends Component {
                 )
               }}
             />
+            <Route
+              exact
+              path={'/ipa-dashboard'}
+              render={() => {
+                return (
+                  <Fragment>
+                    <IPAMainNavbar />
+                    <Route path="/ipa-dashboard" component={IPADashboard} />
+                  </Fragment>
+                )
+              }}
+            />
             <Route exact path="/" component={Login} />
+            <Route exact path="/ipa-login" component={IPALogin} />
             <Route component={NoRouteMatch} />
           </Switch>
 

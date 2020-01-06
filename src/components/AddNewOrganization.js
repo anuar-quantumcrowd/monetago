@@ -41,10 +41,12 @@ const organization = [
   }
 ]
 
-const AddNewOrganization = () => {
+const AddNewOrganization = props => {
+  const { showModal } = props
+
   return (
     <div className="add-new-organization-wrapper">
-      <p>Add Organization</p>
+      <p className="modal-form-title">Add Organization</p>
       <CommonInput
         icon=""
         iconPosition="right"
@@ -64,8 +66,15 @@ const AddNewOrganization = () => {
         dropdownClass="select-org-dropdown"
       />
       <div className="btn-actions">
-        <CommonButtons content="CANCEL" btnClass="cancel-btn" />
-        <CommonButtons content="CREATE ORGANIZATION" btnClass="create-btn" />
+        <CommonButtons
+          content="CANCEL"
+          btnClass="cancel-btn btn-gray"
+          onClick={() => showModal(false)}
+        />
+        <CommonButtons
+          content="CREATE ORGANIZATION"
+          btnClass="create-btn btn-blue"
+        />
       </div>
     </div>
   )

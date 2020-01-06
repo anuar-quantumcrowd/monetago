@@ -20,11 +20,15 @@
   'layout/sidebar', 'layout/content-header', 'layout/main-modal',
   'layout/innertabs', 'layout/animation', 'layout/add-user-on-account-tab',
   'layout/edit-modal', 'layout/set-role-modal-popup', 'layout/organization-card',
-  'layout/delete-user-modal', 'layout/add-new-organization','layout/corporate-identity';
+  'layout/delete-user-modal', 'layout/add-new-organization',
+  'layout/corporate-identity', 'layout/forgot-password',
+  'layout/add-new-contact', 'layout/organization-card-list',
+  'layout/ipa-main-navbar', 'layout/ipa-sidebar', 'layout/ipa-dashboard-cards';
 
 // Components
-@import 'components/buttons', 'components/pop-up', 'components/filter';
+@import 'components/buttons', 'components/pop-up', 'components/filter',
+  'components/input';
 
 // Page-specific styles
-@import 'pages/login', 'pages/dashboard';
+@import 'pages/login', 'pages/dashboard', 'pages/ipa-user-login';
 // , 'pages/main-navigation'
