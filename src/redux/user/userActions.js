@@ -14,11 +14,11 @@ export const login = (username, password) => {
   return dispatch => {
     dispatch(request())
 
-    if (username === 'monetagoadmin' && password == '000') {
+    if (username === 'monetagoadmin' && password === '000') {
       const orgId = '000'
       dispatch(success(orgId, username))
       window.location.href = '/monetago/dist/index.html#/dashboard'
-    } else if (username === 'orgadmin' && password == '111') {
+    } else if (username === 'orgadmin' && password === '111') {
       const orgId = '111'
       window.location.href = '/monetago/dist/index.html#/dashboard'
 
