@@ -7,6 +7,10 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index_bundle.js'
   },
+  devServer: {
+    inline:true,
+    port: 3000
+  },
   module: {
     rules: [
       {

@@ -17,6 +17,16 @@ import {
   ORG_ACCOUNT
 } from './organizationTypes'
 
+import axioz from '../../common/ApiUtils'
+
+axioz('get', `/useraccounts`)
+  .then(response => {
+    console.log(response)
+  })
+  .catch(err => {
+    console.log(err)
+  })
+
 const initialState = {
   sortBy: '',
   filterBy: '',
