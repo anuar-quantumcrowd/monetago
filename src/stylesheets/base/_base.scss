@@ -16,6 +16,10 @@
   box-sizing: border-box;
 }
 
+body {
+  overflow: hidden;
+}
+
 .disabled {
   border: none !important;
 
@@ -98,4 +102,22 @@ textarea {
       border-color: $gray-100 !important;
     }
   }
+
+  &.error {
+    & > input {
+      @include on-event {
+        color: $red-100;
+  
+        border-color: $red-200 !important;
+      }
+    }
+  }
+}
+
+.ui.tiny.modal {
+  overflow-y: unset !important;
+}
+
+.ui.inline.loader.active {
+  margin-left: 5px;
 }

@@ -9,7 +9,6 @@
 */
 
 .btn-default {
-
   padding: 0;
   margin: 0;
   height: 60px;
@@ -24,6 +23,22 @@
   cursor: pointer;
 }
 
+.btn-sky-blue.button {
+  color: $blue-400;
+
+  border: 1px solid $blue-400;
+
+  transition: all .3s ease-in-out;
+
+  background: white;
+
+  @include on-event {
+    color: $white;
+
+    background: $blue-400;
+  }
+}
+
 .btn-blue {
 
   &.button {
@@ -32,18 +47,21 @@
     color: $white;
 
     background-color: $blue-200;
-    box-shadow: 0 6px 10px $gray-500;
+    box-shadow: none;
+
+    transition: all .2s ease-in-out;
 
     @include on-event {
       color: $white;
-  
-      background-color: $blue-200;
+
+      background-color: $blue-400;
+
       box-shadow: 0 6px 10px $gray-500;
     }
   }
 }
 
-.btn-gray {  
+.btn-gray {
 
   &.button {
     @extend .btn-default;
@@ -51,11 +69,15 @@
     color: $gray-600;
 
     background-color: transparent;
+    box-shadow: none;
+
+    transition: all .2s ease-in-out;
 
     @include on-event {
       color: $gray-600;
 
       background-color: transparent;
+      box-shadow: 0 6px 10px $gray-500;
     }
   }
 }

@@ -47,6 +47,12 @@ body {
   color: $blue-200;
 }
 
+.main-info{
+  @extend .segoe-regular;
+  font-size: 16px;
+  color: $blue-400;
+
+}
 .form-link-text {
   @extend .segoe-regular;
   font-size: 18px;
@@ -113,6 +119,13 @@ body {
   @extend .segoe-regular;
   font-size: 16px;
   color: $blue-100;
+}
+
+
+.address-primary {
+  @extend .segoe-regular;
+  font-size: 16px;
+  color: $gray-300 !important;
 }
 
 .modal-form-title {

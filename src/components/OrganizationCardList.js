@@ -75,7 +75,7 @@ const OrganizationCardList = () => {
               className="prev-icon"
               alt="Previous Icon"
             />
-            1-5 of 2,000
+            1-50 of 2,000
             <img
               src={require('../assets/svg/left-arrow.svg')}
               className="next-icon"

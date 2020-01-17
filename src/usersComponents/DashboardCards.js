@@ -30,7 +30,8 @@ const cardContents = [
   { head: 'Total Market ISNs Outstanding', value: '398', sub: 'INR' }
 ]
 
-const cards = cardContents.map(item => ({
+const cards = cardContents.map((item, i) => ({
+  key: i,
   description: {
     content: (
       <>
@@ -44,7 +45,7 @@ const cards = cardContents.map(item => ({
 }))
 
 const DashboardCards = () => {
-  return <Card.Group centered items={cards} itemsPerRow="4" />
+  return <Card.Group centered items={cards} />
 }
 
 export default DashboardCards

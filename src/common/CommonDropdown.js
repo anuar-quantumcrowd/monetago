@@ -17,7 +17,9 @@ const CommonDropdown = ({
   options,
   placeholder,
   isGray,
-  dropdownClass = ''
+  dropdownClass = '',
+  value,
+  disabled
 }) => {
   return (
     <Fragment>
@@ -29,6 +31,8 @@ const CommonDropdown = ({
         })}
         placeholder={placeholder}
         options={options}
+        value={value}
+        disabled={disabled}
       />
     </Fragment>
   )

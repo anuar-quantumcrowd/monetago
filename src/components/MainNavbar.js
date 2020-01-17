@@ -8,22 +8,58 @@
  *  consent. This notice may not be deleted or modified without MonetaGo,Inc.’s consent.
  */
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Icon, Popup } from 'semantic-ui-react'
+import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
+
+import Authentication from '../common/Authentication'
+import { logout } from '../redux'
 
 const MainNavbar = () => {
+  const [user, setUser] = useState({})
+  const dispatch = useDispatch()
+  const history = useHistory()
+
+  useEffect(() => {
+    setUser(JSON.parse(Authentication.loadUserProfile()))
+  }, [])
+
   return (
     <div>
       <div className="main-navbar">
-        <div>
-          <img src={require('../assets/svg/main-navbar-logo.svg')} alt="Logo" />
+        <div className="navbar-brand">
+          <img
+            src={require('../assets/svg/login-logo.svg')}
+            className="navbar-logo"
+            alt="Logo"
+          />
+          <p>
+            Moneta<span>Go</span>
+          </p>
         </div>
         <Popup
           trigger={
             <div className="navbar-user-wrapper">
-              <div className="navbar-user-avatar">AN</div>
-              <div className="navbar-user-name">Admin Name</div>
-              <Icon name="dropdown" />
+              {user.firstName ? (
+                <div>
+                  <div className="navbar-user-avatar">
+                    {`
+                    ${user.firstName.charAt(0).toUpperCase()}
+                    ${user.lastName.charAt(0).toUpperCase()}
+                `}
+                  </div>
+                  <div className="navbar-user-name">
+                    {`
+                  ${user.firstName.charAt(0).toUpperCase() +
+                    user.firstName.slice(1)}
+                  ${user.lastName.charAt(0).toUpperCase() +
+                    user.lastName.slice(1)}
+                `}
+                  </div>
+                  <Icon name="dropdown" />
+                </div>
+              ) : null}
             </div>
           }
           on="click"
@@ -34,9 +70,7 @@ const MainNavbar = () => {
             <div className="menu-wrapper">
               <div
                 className="menu-item"
-                onClick={() => {
-                  window.location.href = '/#/'
-                }}
+                onClick={() => dispatch(logout(history))}
               >
                 Logout
               </div>

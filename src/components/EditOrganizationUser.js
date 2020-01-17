@@ -131,7 +131,7 @@ const EditUserOnOrganization = ({
           icon="mobile alternate"
           iconPosition="left"
           inputStyle="fullwidth-inputs"
-          type="number"
+          type="text"
           value={phoneNumber}
         />
         <CommonInput

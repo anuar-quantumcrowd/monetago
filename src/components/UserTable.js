@@ -12,6 +12,8 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { sortBy, userCheckbox } from '../redux'
 
+import { updateUserRole } from '../redux/user/userActions'
+import { fetchApi } from '../redux/organization/organizationActions'
 import { Table, Button, Popup, Modal } from 'semantic-ui-react'
 import Checkbox from '../common/CommonCheckbox'
 import CommonInput from '../common/CommonInput'
@@ -20,6 +22,115 @@ import MainModal from './MainModal'
 import EditUserOnAccount from './EditUserOnAccount'
 import CommonButtons from '../common/CommonButton'
 import CommonDropdown from '../common/CommonDropdown'
+
+const filterOptions = [
+  {
+    name: 'role',
+    placeholder: 'Role: All',
+    options: [
+      {
+        key: 'all',
+        value: 'all',
+        text: 'All'
+      },
+      {
+        key: 'admin',
+        value: 'admin',
+        text: 'Admin'
+      },
+      {
+        key: 'User',
+        value: 'User',
+        text: 'User'
+      }
+    ]
+  },
+  {
+    name: 'organization',
+    placeholder: 'Organization: All',
+    options: [
+      {
+        key: 'all',
+        value: 'all',
+        text: 'All'
+      },
+      {
+        key: 'organization1',
+        value: 'organization1',
+        text: 'Organization 1'
+      },
+      {
+        key: 'organization2',
+        value: 'organization2',
+        text: 'Organization 2'
+      },
+      {
+        key: 'organization3',
+        value: 'organization3',
+        text: 'Organization 3'
+      }
+    ]
+  },
+  {
+    name: 'status',
+    placeholder: 'Status: All',
+    options: [
+      {
+        key: 'all',
+        value: 'all',
+        text: 'All'
+      },
+      {
+        key: 'active',
+        value: 'active',
+        text: 'Active'
+      },
+      {
+        key: 'inactive',
+        value: 'inactive',
+        text: 'Inactive'
+      }
+    ]
+  }
+]
+
+const headers = [
+  {
+    key: 'checkbox'
+  },
+  {
+    key: 'userId',
+    content: 'User ID'
+  },
+  {
+    key: 'firstName',
+    content: 'Name'
+  },
+  {
+    key: 'email',
+    content: 'Email'
+  },
+  {
+    key: 'phoneNumber',
+    content: 'Phone Number'
+  },
+  {
+    key: 'organization',
+    content: 'Organization'
+  },
+  {
+    key: 'role',
+    content: 'Role'
+  },
+  {
+    key: '',
+    content: ''
+  },
+  {
+    key: '',
+    content: ''
+  }
+]
 
 const actions = [
   {
@@ -45,28 +156,23 @@ const actions = [
 const roles = [
   {
     key: 1,
-    text: 'Sample1',
-    value: 'Sample1'
+    text: 'Issuer - Senior Treasury Operations',
+    value: 'Issuer - Senior Treasury Operations'
   },
   {
     key: 2,
-    text: 'Sample2',
-    value: 'Sample2'
+    text: 'Investor - Senior Operations',
+    value: 'Investor - Senior Operations'
   },
   {
     key: 3,
-    text: 'Sample3',
-    value: 'Sample3'
+    text: 'IPA - Senior Operations',
+    value: 'IPA - Senior Operations'
   },
   {
     key: 4,
-    text: 'Sample4',
-    value: 'Sample4'
-  },
-  {
-    key: 5,
-    text: 'Sample5',
-    value: 'Sample5'
+    text: 'MGADMIN',
+    value: 'MGADMIN'
   }
 ]
 
@@ -77,11 +183,17 @@ const UserTable = ({ type, content }) => {
   const [popupState, setPopupState] = useState([])
 
   const [openSetRoleModal, setopenSetRoleModal] = useState(false)
+  const [roleValue, setroleValue] = useState({
+    roles: []
+  })
+  const [userIdSetRole, setuserIdSetRole] = useState('')
 
   const [openDeleteModal, setopenDeleteModal] = useState(false)
 
   const [modal, setModal] = useState(false)
   const [component, setComponent] = useState({ component: '' })
+
+  const [selectedUser, setSelectedUser] = useState({})
 
   const closeSetRoleModal = () => {
     setopenSetRoleModal(false)
@@ -100,25 +212,30 @@ const UserTable = ({ type, content }) => {
   }
 
   const handlePopupClose = (index, comp = 'null', data, text = null) => {
+    setSelectedUser(data)
     popupState.splice(index, 1, false)
     setPopupState([...popupState])
     if (comp !== 'null') {
       setModal(true)
       setComponent({
         component: comp,
+        id: data.id,
         status: data.active,
-        uId: data.userId,
+        uId: data.uid,
+        password: data.password,
         fName: data.firstName,
         lName: data.lastName,
         email: data.email,
-        pNum: data.phoneNumber,
-        orgName: data.organizationName,
+        pNum: data.phone,
+        orgName: data.organization[0].legalName,
         group: data.group,
+        department: data.department,
         role: data.role
       })
     } else if (text === 'Set Role') {
       setModal(false)
       setopenSetRoleModal(true)
+      setuserIdSetRole(data.id)
     } else if (text === 'Delete') {
       setModal(false)
       setopenDeleteModal(true)
@@ -127,6 +244,16 @@ const UserTable = ({ type, content }) => {
 
   const handleModalClose = () => {
     setModal(false)
+  }
+
+  const setRoleValue = e => {
+    setroleValue({ roles: [e.target.innerText] })
+  }
+
+  const updateSetRole = () => {
+    updateUserRole(userIdSetRole, roleValue)
+    dispatch(fetchApi())
+    setopenSetRoleModal(false)
   }
 
   return (
@@ -138,7 +265,7 @@ const UserTable = ({ type, content }) => {
         placeholder="Search Account Name, Email or Phone Number..."
       />
       <div className="table-filter-details">
-        <CommonFilterDropdown options={table.filterOptions} />
+        <CommonFilterDropdown options={filterOptions} />
         <div className="table-filter-page">
           <p>
             <img
@@ -146,7 +273,7 @@ const UserTable = ({ type, content }) => {
               className="prev-icon"
               alt="Previous Icon"
             />
-            1-5 of 2,000
+            1-50 of 2,000
             <img
               src={require('../assets/svg/left-arrow.svg')}
               className="next-icon"
@@ -159,7 +286,7 @@ const UserTable = ({ type, content }) => {
         <Table unstackable>
           <Table.Header>
             <Table.Row>
-              {table.headers.map((header, i) => {
+              {headers.map((header, i) => {
                 return header.key === 'checkbox' ? (
                   <Table.HeaderCell key={i}>
                     {' '}
@@ -171,12 +298,7 @@ const UserTable = ({ type, content }) => {
                     />
                   </Table.HeaderCell>
                 ) : (
-                  <Table.HeaderCell
-                    key={i}
-                    onClick={() =>
-                      dispatch(sortBy(type, header.key, content.name))
-                    }
-                  >
+                  <Table.HeaderCell key={i}>
                     {header.content}{' '}
                     {typeof header.content === 'string' && header.content ? (
                       <img
@@ -193,23 +315,24 @@ const UserTable = ({ type, content }) => {
 
           <Table.Body>
             {content
-              ? content.users.map((data, i) => {
+              ? content.map((data, i) => {
                   return (
-                    <Table.Row key={i}>
+                    <Table.Row
+                      key={i}
+                      className={data.selected ? 'checked' : null}
+                    >
                       <Table.Cell>
                         <Checkbox
                           checked={data.selected}
-                          onChange={() =>
-                            dispatch(userCheckbox(type, data.userId))
-                          }
+                          onChange={() => dispatch(userCheckbox(type, data.id))}
                         />
                       </Table.Cell>
-                      <Table.Cell className="user-id">{data.userId}</Table.Cell>
+                      <Table.Cell className="user-id">{data.uid}</Table.Cell>
                       <Table.Cell>{`${data.firstName} ${data.lastName}`}</Table.Cell>
                       <Table.Cell>{data.email}</Table.Cell>
-                      <Table.Cell>{data.phoneNumber}</Table.Cell>
-                      <Table.Cell>{data.organizationName}</Table.Cell>
-                      <Table.Cell>{data.role}</Table.Cell>
+                      <Table.Cell>{data.phone}</Table.Cell>
+                      <Table.Cell>{data.organization[0].legalName}</Table.Cell>
+                      <Table.Cell>{data.roles}</Table.Cell>
                       <Table.Cell className="activity">
                         <span className={data.active ? 'active' : 'inactive'}>
                           {data.active ? 'Active' : 'Inactive'}
@@ -271,17 +394,9 @@ const UserTable = ({ type, content }) => {
       <MainModal trigger={''} open={modal} onClose={handleModalClose}>
         {
           <component.component
-            status={component.status}
-            userId={component.uId}
-            firstName={component.fName}
-            lastName={component.lName}
-            password={component.password}
-            email={component.email}
-            phoneNumber={component.pNum}
-            organization={component.orgName}
-            department={component.department}
-            group={component.group}
-            role={component.role}
+            id={component.id}
+            tableType={type}
+            modal={() => setModal()}
           />
         }
       </MainModal>
@@ -301,6 +416,7 @@ const UserTable = ({ type, content }) => {
             name={roles}
             options={roles}
             dropdownClass="dropdown-select-role"
+            onChange={setRoleValue}
           />
           <div className="btn-container">
             <CommonButtons
@@ -309,9 +425,9 @@ const UserTable = ({ type, content }) => {
               onClick={closeSetRoleModal}
             />
             <CommonButtons
-              content="SAVE CHANGES"
+              content="UPDATE"
               btnClass="btn-save btn-blue"
-              onClick={closeSetRoleModal}
+              onClick={updateSetRole}
             />
           </div>
         </Modal.Content>
@@ -335,11 +451,7 @@ const UserTable = ({ type, content }) => {
               btnClass="btn-cancel btn-white"
               onClick={closeDeleteModal}
             />
-            <CommonButtons
-              content="DELETE"
-              btnClass="btn-deact btn-blue"
-              onClick={closeDeleteModal}
-            />
+            <CommonButtons content="DELETE" btnClass="btn-deact btn-blue" />
           </div>
         </Modal.Content>
       </Modal>

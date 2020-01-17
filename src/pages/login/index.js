@@ -8,13 +8,15 @@
  *  consent. This notice may not be deleted or modified without MonetaGo,Inc.’s consent.
  */
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 
 import LoginForm from './LoginForm'
 import ForgotPassword from './ForgotPassword'
 
 const Login = () => {
   const [loginStep, setLoginStep] = useState('loginForm')
+  const history = useHistory()
 
   const loginComponents = {
     loginForm: LoginForm,
@@ -22,6 +24,12 @@ const Login = () => {
   }
 
   const ActiveComponent = loginComponents[loginStep]
+
+  useEffect(() => {
+    if (sessionStorage.getItem('accessToken')) {
+      history.push('/dashboard')
+    }
+  }, [])
 
   return (
     <div className="login">

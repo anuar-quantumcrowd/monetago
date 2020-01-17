@@ -25,6 +25,17 @@
       margin-right: 30px;
       width: 150px;
       height: 50px;
+
+      box-shadow: none !important;
+
+      transition: all .2s ease-in-out;
+
+      @include on-event {
+        color: $gray-600;
+
+        background-color: transparent;
+        box-shadow: 0 6px 10px $gray-500 !important;
+      }
     }
 
     .btn-deact {

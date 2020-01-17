@@ -19,8 +19,8 @@
 .edit-container {
   display: flex;
   flex-direction: column;
-  padding: 76px 115px;
-  width: 100%;
+  justify-content: center;
+  padding: 0 115px;
   height: 100%;
 
   .edit-header {
@@ -51,15 +51,24 @@
     }
 
     .status {
-      font-size: 12px;
-      color: #fff;
-      text-align: center;
+      @extend .flex-content;
+
+      width: 60px;
+      height: 24px;
+
+      color: white;
+
+      text-transform: capitalize;
 
       border-radius: 12px;
 
-      opacity: 1;
+      &.active {
+        background-color: $blue-400;
+      }
 
-      background: #45a5ef 0% 0% no-repeat padding-box;
+      &.inactive {
+        background-color: $gray-400;
+      }
     }
 
     .role {
@@ -67,7 +76,20 @@
     }
 
     .avatar-icon {
+      @extend .flex-content;
+      margin: 0 auto;
+      margin-bottom: 10px;
+
+      width: 50px;
+      height: 50px;
+
+      font-family: $font-segoe-ui;
       font-size: 22px;
+      font-weight: 400;
+      color: $white;
+
+      background-color: $blue-600;
+      border-radius: 50%;
     }
   }
 }
@@ -76,7 +98,7 @@
   display: flex;
   flex-direction: column;
 
-  height: 100%;
+  // height: 100%;
 
   border-top: 1px solid $gray-100;
 
@@ -95,34 +117,6 @@
 
       cursor: pointer;
     }
-  }
-
-  .reset {
-    // z-index: 999;
-
-    // display: flex;
-    // flex-direction: column;
-    // justify-content: center;
-
-    // padding-left: 8px;
-
-    // margin-top: -10.5%;
-    // margin-right: 5px;
-    // margin-bottom: 20px;
-    // width: fit-content;
-
-    // height: 45px;
-
-    // font-size: 14px;
-    // font-weight: 700;
-    // color: #182e58;
-
-    // background-color: #fff;
-
-    // align-self: flex-end;
-    // p {
-    //   cursor: pointer;
-    // }
   }
 
   .edit-user-title {
@@ -144,6 +138,10 @@
 
     font-size: 16px;
     color: #182e58;
+  }
+
+  .disabled-org {
+    border: 1px solid $gray-100 !important;
   }
 
   .fullname-container {
@@ -180,9 +178,57 @@
     }
   }
 }
+.modal-form-title-reset {
+  @extend .segoe-regular;
+
+  font-size: 28px;
+  color: $blue-100;
+}
+
+.reset-message {
+  @extend .segoe-regular;
+  margin-top: -25px;
+
+  font-size: 16px;
+  color: $blue-100;
+}
+
+.reset-inputs {
+  margin-bottom: 15px;
+  width: 100%;
+  height: 50px;
+
+  color: #182e58;
+}
+
+.btn-actions-reset {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+
+  .btn-cancel-reset {
+    margin-right: 10px !important;
+    width: 140px;
+  }
+
+  .btn-update-reset {
+    width: 140px;
+  }
+}
+
+.portal-content {
+  color: green;
+
+  .header-success {
+    font-size: 20px;
+    color: green;
+  }
+}
 
 @include respond-to(lg) {
   .edit-container {
+    padding: 0 50px;
+
     .edit-header {
       .edit-summary {
         .avatar-icon {
@@ -243,6 +289,25 @@
           font-size: 14px;
         }
       }
+    }
+  }
+}
+
+@media (min-height: 768px) and (max-height: 800px) {
+  .edit-container {
+    .edit-header {
+      margin-bottom: 10px;
+    }
+  }
+
+  .edit-user-container {
+    .edit-user-title {
+      margin: 15px 0;
+    }
+
+    .halfwidth-inputs,
+    .fullwidth-inputs {
+      margin-bottom: 15px;
     }
   }
 }

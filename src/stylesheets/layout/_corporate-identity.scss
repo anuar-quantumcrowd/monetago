@@ -2,6 +2,10 @@
   margin-top: 30px;
   margin-left: 80px;
   max-width: 900px;
+  
+  .org-details-holder {
+    margin-bottom: 30px;
+  }
 
   .add-contact-btn {
     @extend .tbl-data-text;
@@ -16,25 +20,30 @@
     }
   }
 
+  .org-identity-name-holder {
+    margin-bottom: 15px;
+  }
   &-info {
     margin-bottom: 15px;
   }
 
-  &-info:first-child .edit-holder {
-    display: none;
+  .org-contact-holder {
+    margin-bottom: 15px;
   }
 
   .contact-person-holder {
     position: relative;
 
-    margin: 30px 0;
+    .contact-person {
+      padding: 30px 0;
+    }
 
     .edit-holder {
       position: absolute;
 
       width: 100%;
 
-      border: none;
+      // border: none;
     }
     .textarea-label {
       display: none;
@@ -68,7 +77,7 @@
       top: 50%;
       left: 0;
 
-      width: 130px;
+      width: fit-content;
 
       text-align: left;
 
@@ -100,4 +109,9 @@
 
     resize: none;
   }
+}
+
+.org-address-edit,.org-contact-edit,.contact-person-edit,
+.org-participants-edit {
+  display: none;
 }

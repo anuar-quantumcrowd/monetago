@@ -16,22 +16,44 @@
   height: 80px;
 
   background-color: $white;
-  box-shadow: 0 -5px 40px #7989a833;
+  border-bottom: 1px solid $gray-50;
 
   // box-shadow: 0 -7px 23px 0 rgba(0, 0, 0, .75);
 
+  .navbar-brand {
+    display: flex;
+
+    p {
+      margin-left: 10px;
+
+      font-size: 24px;
+      color: $blue-100;
+
+      span {
+        color: $yellow-100;
+      }
+    }
+  }
+
+  .navbar-logo {
+    width: 30px;
+    height: 35px;
+  }
+
   .navbar-user {
     &-wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
       cursor: pointer;
 
       .dropdown {
         margin: 0 5px 4px;
 
         color: $blue-100;
+      }
+
+      & div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
     }
 
@@ -75,7 +97,7 @@
 
     cursor: pointer;
     transition: all .3s ease-in-out;
-    
+
     &:hover {
       color: $white;
 

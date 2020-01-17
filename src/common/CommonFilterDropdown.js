@@ -19,14 +19,14 @@ const CommonFilterDropdown = ({ options }) => {
 
   return (
     <div className="table-filter">
-      <p>
+      <div>
         <img
           src={require('../assets/svg/filter.svg')}
           className="filter-icon"
           alt="Filter Icon"
         />{' '}
         Filter:
-      </p>
+      </div>
       {options.map((filter, i) => {
         return (
           <Dropdown

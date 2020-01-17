@@ -51,7 +51,7 @@ const ContentHeader = ({
       ) : null}
 
       <div className="main-header">
-        <p>{contentHeaderTitle}</p>
+        <div className="main-header-title">{contentHeaderTitle}</div>
         <MainModal
           btnTitle={btnContent}
           icon={icon}
@@ -65,14 +65,12 @@ const ContentHeader = ({
           ) : btnContent === 'Add User' && type === 'cards' ? (
             <AddOrganizationUser
               showModal={setShowModal}
+              orgType={orgType}
               company={contentHeaderTitle}
             />
           ) : btnContent === 'Add User' ? (
             <AddUserOnAccountTab showModal={setShowModal} />
-          ) : // btnContent === 'Edit User' ? (
-          //   <EditUserOnAccount />
-          // ) :
-          null}
+          ) : btnContent === 'Edit User' ? null : null}
         </MainModal>
       </div>
       {type === 'cards' ? (

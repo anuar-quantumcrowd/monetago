@@ -23,11 +23,11 @@
   'layout/delete-user-modal', 'layout/add-new-organization',
   'layout/corporate-identity', 'layout/forgot-password',
   'layout/add-new-contact', 'layout/organization-card-list',
-  'layout/ipa-main-navbar', 'layout/ipa-sidebar', 'layout/ipa-dashboard-cards';
+  'layout/ipa-main-navbar', 'layout/ipa-sidebar', 'layout/ipa-dashboard-cards', 'layout/corporate-entity', 'layout/corporate-modal';
 
 // Components
 @import 'components/buttons', 'components/pop-up', 'components/filter',
-  'components/input';
+  'components/input', 'components/toggle';
 
 // Page-specific styles
 @import 'pages/login', 'pages/dashboard', 'pages/ipa-user-login';

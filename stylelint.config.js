@@ -36,7 +36,6 @@ module.exports = {
     'function-calc-no-unspaced-operator': true,
     'function-comma-space-after': 'always',
     'function-name-case': 'lower',
-    'function-url-quotes': 'always',
     indentation: 2,
     'length-zero-no-unit': true,
     'max-empty-lines': [

@@ -10,6 +10,7 @@
 
 .table-filter {
   display: flex;
+  align-items: center;
 
   // justify-content: space-between;
 
@@ -18,13 +19,13 @@
   &-details {
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 
   &-page {
-    p {
-      margin: auto 20px;
-      margin-top: 13px;
+    margin-bottom: 30px;
 
+    p {
       .prev-icon {
         padding-bottom: 1px;
         margin-right: 10px;
@@ -46,7 +47,8 @@
   }
 
   &-dropdown {
-    margin-left: 30px;
+    // margin-left: 20px;
+    margin: 10px;
 
     border-radius: 10px;
   }
@@ -55,6 +57,20 @@
     margin: auto 0;
 
     color: $gray-200;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .table-filter {
+    &-details {
+      align-items: unset;
+    }
+
+    &-page {
+      margin-bottom: 20px;
+
+      text-align: right;
+    }
   }
 }
 

@@ -9,18 +9,26 @@
  */
 
 import React, { Component, Fragment } from 'react'
-import { HashRouter, Route, Switch } from 'react-router-dom'
+import { HashRouter, Route, Switch, useHistory } from 'react-router-dom'
 import { hot } from 'react-hot-loader'
+// import IdleTimer from 'react-idle-timer'
+// import { useDispatch } from 'react-redux'
 
+// import { logout } from './redux'
 import NoRouteMatch from './pages/404'
 import Login from './pages/login'
 import Dashboard from './pages/dashboard'
 import MainNavbar from './components/MainNavbar'
 import IPADashboard from './pages/users/dashboard'
 import IPAMainNavbar from './usersComponents/MainNavbar'
+import IPALogin from './pages/users/login'
+
 import 'semantic-ui-css/semantic.min.css'
 import './stylesheets/main.scss'
-import IPALogin from './pages/users/login'
+
+export const route = () => {
+  return useHistory()
+}
 
 class App extends Component {
   render() {

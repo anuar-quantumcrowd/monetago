@@ -12,14 +12,19 @@
   margin-bottom: 30px;
 
   .search-input {
-    margin-bottom: 40px;
+    // margin-bottom: 40px;
+    margin: 40px 0 20px;
 
     // width: 35%;
     width: 460px;
   }
 
   .table-wrapper {
-    overflow-x: scroll;
+    overflow-x: auto;
+  }
+
+  .table-filter {
+    margin-bottom: 30px;
   }
 
   .ui.table {
@@ -84,15 +89,45 @@
         background-color: $gray-400;
       }
     }
+
+    tbody {
+      tr:hover {
+        background-color: $blue-500;
+        box-shadow: 0 10px 20px -10px rgba(0, 0, 0, .5);
+
+        transition: all 200ms ease-in-out;
+
+        td {
+          color: $white;
+        }
+      }
+
+      .checked {
+        background-color: $blue-500;
+
+        td {
+          color: $white;
+        }
+      }
+    }
   }
 }
 
+@media screen and (max-width: 1400px) {
+  .table {
+    &-filter-details {
+      flex-direction: column;
+    }
+  }
+}
 
 @include respond-to(lg-up) {
   .admin-table-wrapper {
     .table {
       &-filter {
-        p { width: 100%; }
+        p {
+          width: 100%;
+        }
 
         .ui.selection.dropdown {
           margin: 10px;
@@ -113,8 +148,6 @@
       &-filter {
         flex-wrap: wrap;
 
-        p { width: 100%; }
-
         .ui.selection.dropdown {
           margin: 10px;
         }
@@ -125,4 +158,18 @@
       }
     }
   }
+}
+
+
+@include respond-to(md-down) {
+  .admin-table-wrapper {
+    .table {
+      .table-wrapper {
+        overflow-x: scroll;
+      }
+    }
+  }
+}
+.border-i {
+  border: 1px solid black;
 }

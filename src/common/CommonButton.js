@@ -9,7 +9,7 @@
  */
 
 import React, { Fragment } from 'react'
-import { Button, Icon } from 'semantic-ui-react'
+import { Button, Icon, Dimmer, Loader } from 'semantic-ui-react'
 
 const CommonButtons = ({
   onClick,
@@ -19,7 +19,8 @@ const CommonButtons = ({
   type = 'button',
   icon = '',
   image = '',
-  disabled
+  disabled,
+  loader = false
 }) => {
   return (
     <Fragment>
@@ -32,6 +33,7 @@ const CommonButtons = ({
         {image ? <img src={image} alt="img" /> : ''}
         {icon ? <Icon name={icon} /> : ''}
         {content}
+        {loader && <Loader active inline inverted size="tiny" />}
       </Button>
     </Fragment>
   )

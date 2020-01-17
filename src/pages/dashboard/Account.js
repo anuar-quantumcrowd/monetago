@@ -7,15 +7,19 @@ import OrganizationAccountManagement from '../../components/OrganizationAccountM
 
 const Account = () => {
   const data = useSelector(state => state.organization)
-  const dataOrg = useSelector(state => state.organization.organization)
+  const dataOrg = useSelector(state => state.organization.organizations)
   const orgId = useSelector(state => state.log.orgId)
   const dispatch = useDispatch()
 
   const orgContentData = dataOrg
   const found = orgContentData.find(contentData => contentData.orgId === orgId)
-
   useEffect(() => {
-    if (orgId === '111') {
+    if (
+      orgId === '111' ||
+      orgId === '112' ||
+      orgId === '113' ||
+      orgId === '114'
+    ) {
       dispatch(orgProfile('organizationAccountManagement', data, found))
     }
   }, [])
@@ -24,14 +28,17 @@ const Account = () => {
       <ContentHeader
         contentHeaderTitle="Accounts"
         btnContent="Add User"
-        type=""
+        type="OrgAndAcct"
         icon="add"
       />
 
-      {orgId === '111' ? (
+      {orgId === '111' ||
+      orgId === '112' ||
+      orgId === '113' ||
+      orgId === '114' ? (
         <UserTable type="Organization" content={data.selectedOrg} />
       ) : (
-        <UserTable type="Account" content={data.accounts} />
+        <UserTable type="Account" content={data.userAccounts} />
       )}
     </div>
   )

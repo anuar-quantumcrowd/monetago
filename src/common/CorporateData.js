@@ -78,6 +78,7 @@ const CorporateData = ({
                     style="corporate-textarea org-identity-detail disabled"
                   />
                   <div className="separation">|</div>
+
                   <CommonTextArea
                     onBlurText={onBlurText}
                     index={i}

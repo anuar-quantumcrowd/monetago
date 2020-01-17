@@ -41,11 +41,11 @@
   .main-header {
     display: flex;
     flex-direction: row;
-    margin-top: 10px;
 
-    p {
-      margin: 0 0 40px;
+    // margin-top: 10px;
+    margin: 10px 0 18px;
 
+    &-title {
       font-size: 28px;
       letter-spacing: 0;
       color: $blue-100;
@@ -67,10 +67,20 @@
 
       border: 1px solid $gray-100;
       border-radius: 5px;
+      box-shadow: none;
 
       opacity: 1;
 
+      transition: all .2s ease-in-out;
+
       background: $white 0% 0% no-repeat padding-box;
+
+      &:hover {
+        color: $white;
+
+        background-color: $blue-400;
+        box-shadow: 0 6px 10px $gray-500;
+      }
     }
   }
 

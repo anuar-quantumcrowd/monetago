@@ -1,5 +1,9 @@
-.ui.centered.four.cards {
+.ui.centered.cards {
   padding: 7em 3em;
+}
+
+.ui.centered.cards > .ui.card {
+  width: 360px;
 }
 
 .ui.card,
@@ -15,8 +19,6 @@
 }
 
 .ui.card {
-  padding: 2em 1em;
-
   &:hover {
     background-color: $blue-100;
 

@@ -14,8 +14,13 @@ import {
   SORT_ADMIN_TABLE,
   FILTER_ADMIN_TABLE,
   CHECKBOX_SELECT_USER,
-  ORG_ACCOUNT
+  ORG_ACCOUNT,
+  CREATE_ORGANIZATION,
+  FETCH_API,
+  SET_ORG_USER,
+  RESET_SELECTED_USERS
 } from './organizationTypes'
+import axioz from '../../common/ApiUtils'
 
 export const orgActiveStep = currStep => {
   return {
@@ -27,18 +32,17 @@ export const orgActiveStep = currStep => {
 export const orgAccount = (data, organization) => {
   return {
     type: ORG_ACCOUNT,
-    // activeStep: currStep,
     data: data,
     orgName: organization
   }
 }
 
-export const orgProfile = (currStep, data, organization) => {
+export const orgProfile = (currStep, currOrgTab, orgId) => {
   return {
     type: ORG_PROFILE,
     activeStep: currStep,
-    data: data,
-    orgName: organization
+    activeOrgTab: currOrgTab,
+    orgId: orgId
   }
 }
 
@@ -65,4 +69,79 @@ export const userCheckbox = (tableType, id, orgName) => {
     checkedUser: id,
     orgName: orgName
   }
+}
+export const resetSelected = () => {
+  return {
+    type: RESET_SELECTED_USERS,
+    selected: false
+  }
+}
+
+export const fetchApi = () => {
+  return dispatch => {
+    let orgData = []
+    let userData = []
+    console.log('Fetch API')
+    // GET - All Organizations
+    axioz('get', '/organizations')
+      .then(response => {
+        orgData = response.data._embedded.organizations
+        // GET - All User Accounts
+        axioz('get', '/useraccounts')
+          .then(response => {
+            userData = response.data._embedded.useraccounts
+            dispatch(callApi(orgData, userData))
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+}
+
+export const createOrganization = data => {
+  return dispatch => {
+    axioz('post', '/organizations', data)
+      .then(response => {
+        console.log(response, 'Test')
+        dispatch(createOrg(response))
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+}
+
+// export const callUserAccountsApi = () => {
+//   return dispatch => {
+//     // GET - All User Accounts
+//     axioz('get', '/useraccounts')
+//       .then(response => {
+//         dispatch(setUserAccounts(response.data._embedded.useraccounts))
+//       })
+//       .catch(err => {
+//         console.log(err)
+//       })
+//   }
+// }
+
+const callApi = (orgs, users) => {
+  return {
+    type: FETCH_API,
+    orgs: orgs,
+    data: users
+  }
+}
+
+export const setUserOrg = () => {
+  return {
+    type: SET_ORG_USER
+  }
+}
+
+export const createOrg = () => {
+  return { type: CREATE_ORGANIZATION }
 }

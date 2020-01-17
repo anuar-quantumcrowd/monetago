@@ -11,7 +11,13 @@
 import React from 'react'
 import { Checkbox } from 'semantic-ui-react'
 
-const CommonCheckbox = ({ onChange, name, checked, checkboxStyle }) => {
+const CommonCheckbox = ({
+  onChange,
+  name,
+  checked,
+  checkboxStyle,
+  onClick
+}) => {
   return (
     <div className="holder-checkbox">
       <Checkbox
@@ -19,6 +25,7 @@ const CommonCheckbox = ({ onChange, name, checked, checkboxStyle }) => {
         name={name}
         checked={checked}
         className={checkboxStyle}
+        onClick={onClick}
       />
     </div>
   )

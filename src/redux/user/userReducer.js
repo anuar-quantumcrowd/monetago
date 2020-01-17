@@ -11,20 +11,47 @@
 import { userConstants } from './userTypes'
 
 const initialState = {
-  logIn: false,
-  user: '',
-  orgId: ''
+  loggedIn: false,
+  loggingIn: false,
+  created: false,
+  accountData: {}
 }
 
 export const auth = (state = initialState, action) => {
   switch (action.type) {
     case userConstants.USER_LOGIN_REQUEST: {
-      return { loggingIn: true }
+      return {
+        ...state,
+        loggingIn: true
+      }
+    }
+
+    case userConstants.CREATE_REQUEST: {
+      return { created: true }
     }
 
     case userConstants.USER_LOGIN_SUCCESS: {
-      return { loggedIn: true, user: action.user, orgId: action.orgId }
+      return {
+        ...state,
+        loggedIn: true,
+        loggingIn: false
+      }
     }
+
+    case userConstants.FETCH_USER_ACCOUNT: {
+      return {
+        ...state,
+        accountData: action.data
+      }
+    }
+
+    case userConstants.UPDATE_USER_ACCOUNT: {
+      return {
+        ...state,
+        accountData: action.data
+      }
+    }
+
     default:
       return state
   }

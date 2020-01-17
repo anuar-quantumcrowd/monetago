@@ -19,7 +19,6 @@
 .login-page-wrapper {
   display: flex;
   margin: auto;
-  width: 28%;
   height: 100vh;
 
   .login-content {
@@ -54,6 +53,14 @@
       font-weight: 700;
       color: #182e58;
     }
+    .steps {
+      margin: auto;
+      margin-top: -20px;
+      margin-bottom: 20px;
+      width: 60%;
+
+      color: #182e58;
+    }
     .input-wrapper {
       margin: auto;
       width: 60%;
@@ -71,6 +78,8 @@
     }
 
     .checkbox-wrapper {
+      position: relative;
+
       display: flex;
       margin: auto;
       margin-top: 20px;
@@ -85,6 +94,9 @@
         cursor: pointer;
       }
       .message-forgot {
+        position: absolute;
+        right: 0;
+
         flex: auto;
         margin-top: -2px;
 
@@ -102,6 +114,8 @@
       width: 60%;
 
       .sign-in-btn {
+        margin-top: 10px;
+        margin-bottom: 40px;
         height: 45px;
 
         font-weight: 100;
@@ -111,7 +125,7 @@
         background-color: #182e58;
         border-radius: 0;
       }
-      .create-account-btn {
+      .submit-btn {
         margin-top: 20px;
         height: 45px;
 
@@ -119,9 +133,18 @@
 
         color: #fff;
 
-        background-color: #266aa1;
+        background-color: #182e58;
         border-radius: 0;
       }
+    }
+    .back-to-login {
+      margin: auto;
+      margin-top: 50px;
+      width: fit-content;
+
+      color: #c0c0c0;
+
+      cursor: pointer;
     }
   }
 }
@@ -144,6 +167,9 @@
         margin-top: 15px;
 
         font-size: 19px;
+      }
+      .steps {
+        font-size: 15px;
       }
       .input-wrapper {
         width: 70%;
@@ -176,9 +202,6 @@
         width: 70%;
 
         .sign-in-btn {
-          height: 40px;
-        }
-        .create-account-btn {
           height: 40px;
         }
       }
@@ -236,9 +259,6 @@
         .sign-in-btn {
           height: 45px;
         }
-        .create-account-btn {
-          height: 45px;
-        }
       }
     }
   }
@@ -294,9 +314,6 @@
         .sign-in-btn {
           height: 45px;
         }
-        .create-account-btn {
-          height: 45px;
-        }
       }
     }
   }
@@ -350,9 +367,6 @@
         width: 70%;
 
         .sign-in-btn {
-          height: 40px;
-        }
-        .create-account-btn {
           height: 40px;
         }
       }
@@ -417,9 +431,6 @@
         width: 90%;
 
         .sign-in-btn {
-          height: 40px;
-        }
-        .create-account-btn {
           height: 40px;
         }
       }

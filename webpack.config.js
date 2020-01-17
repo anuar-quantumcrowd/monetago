@@ -8,8 +8,25 @@ module.exports = {
     filename: 'index_bundle.js'
   },
   devServer: {
-    inline:true,
-    port: 3000
+    inline: true,
+    port: 3000,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+      "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+    },
+    proxy: {
+      '/v1/di/api': {
+        target: {
+          host: "13.124.19.114",
+          protocol: 'http:',
+          port: 8080
+        },
+        pathRewrite: {
+          '^/api': ''
+        }
+      }
+    }
   },
   module: {
     rules: [
@@ -27,6 +44,17 @@ module.exports = {
         test: /\.(js)$/,
         exclude: /node_modules/,
         use: 'babel-loader'
+      },
+      {
+        test: /\.(js)$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        options: {
+          presets: ['@babel/preset-env',
+            '@babel/react', {
+              'plugins': ['@babel/plugin-proposal-class-properties']
+            }]
+        }
       },
       {
         test: /\.(css)$/,
@@ -51,6 +79,7 @@ module.exports = {
           }
         ]
       },
+
       {
         test: /\.(woff|woff2|eot|ttf)$/,
         loader: 'url-loader'

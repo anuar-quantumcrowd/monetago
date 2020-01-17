@@ -35,7 +35,7 @@ const ForgotPassword = props => {
   const handleEmailStatus = event => {
     const { value } = event.target
 
-    validateEmail(value, inputStatus, setInputStatus)
+    validateEmail(value, inputStatus.email, setInputStatus)
   }
 
   useEffect(() => {

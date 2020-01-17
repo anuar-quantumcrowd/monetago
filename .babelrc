@@ -7,7 +7,15 @@
  *  may be transmitted or redistributed to any person without MonetaGo,Inc.’s prior written
  *  consent. This notice may not be deleted or modified without MonetaGo,Inc.’s consent.
  */
-
 {
-  "presets": ["@babel/preset-env", "@babel/preset-react"]
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "usage",
+        "corejs": 3.6
+      }
+    ],
+    "@babel/preset-react"
+  ]
 }

@@ -8,35 +8,341 @@
  *  consent. This notice may not be deleted or modified without MonetaGo,Inc.’s consent.
  */
 
-import React, { useState } from 'react'
+import React, { useState, Fragment, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+
 import CommonInput from '../common/CommonInput'
+import CommonPasswordInput from '../common/CommonPasswordInput'
 import CommonDropdown from '../common/CommonDropdown'
 import CommonButtons from '../common/CommonButton'
+import CommonManipulators from '../common/CommonManipulators'
+import CommonValidations from '../common/CommonValidations'
+
+import { createUsers } from '../redux/user/userActions'
+
+const roles = [
+  {
+    key: 1,
+    text: 'Issuer - Senior Treasury Operations',
+    value: 'Issuer - Senior Treasury Operations'
+  },
+  {
+    key: 2,
+    text: 'Investor - Senior Operations',
+    value: 'Investor - Senior Operations'
+  },
+  {
+    key: 3,
+    text: 'IPA - Senior Operations',
+    value: 'IPA - Senior Operations'
+  },
+  {
+    key: 4,
+    text: 'MGADMIN',
+    value: 'MGADMIN'
+  }
+]
 
 const AddUserOnAccountTab = props => {
   const { showModal } = props
-  const [state, setstate] = useState({})
+  const dispatch = useDispatch()
 
-  const handleChange = e => {
-    const { name, value } = e.target
-    setstate({ ...state, [name]: value })
-  }
+  const orgState = useSelector(state => state.organization)
+  const orgList = []
 
-  const handleDropDownChange = e => {
-    const input = e.target.innerText
-    setstate({ ...state, role: input })
-  }
+  orgState.organizations.map((org, i) => {
+    return orgList.push({
+      key: i + 1,
+      text: org.legalName,
+      value: org.orgId
+    })
+  })
 
-  const create_user = () => {
-    if (state.password === state.confirmPass) {
-      console.log('Password matched')
+  const [disabled, setDisabled] = useState(true)
+  const [inputStatus, setInputStatus] = useState({
+    email: null,
+    password: false,
+    confirmPass: false
+  })
+  const [loader, setLoader] = useState(false)
+
+  const [passwordMetrics, setPasswordMetrics] = useState({
+    meetsMinimumLength: false,
+    hasNumber: false,
+    hasSpecial: false
+  })
+
+  const [confirmPasswordMetrics, setConfirmPasswordMetrics] = useState({
+    meetsMinimumLength: false,
+    hasNumber: false,
+    hasSpecial: false
+  })
+
+  const [createUser, setCreateUser] = useState({
+    uid: '',
+    orgId: '',
+    email: '',
+    firstName: '',
+    lastName: '',
+    phone: '',
+    department: '',
+    groups: '',
+    roles: [],
+    confirmPass: '',
+    password: '',
+    profile: '{}',
+    active: true
+  })
+
+  const inputs = [
+    {
+      onContainer: false,
+      inputType: CommonInput,
+      type: 'text',
+      icon: 'user',
+      iconPos: 'left',
+      placeholder: 'User ID',
+      inputStyle: 'fullwidth-inputs',
+      required: true,
+      name: 'uid',
+      value: createUser.uid
+    },
+    {
+      onContainer: false,
+      inputType: CommonPasswordInput,
+      // type: 'password',
+      icon: 'lock',
+      iconPos: 'left',
+      placeholder: 'Password',
+      inputStyle: 'fullwidth-inputs',
+      required: true,
+      name: 'password',
+      value: createUser.password,
+      passwordMetrics: passwordMetrics,
+      callbackPasswordMetrics: setPasswordMetrics,
+      status: inputStatus,
+      callbackInputStatus: setInputStatus
+    },
+    {
+      onContainer: false,
+      inputType: CommonPasswordInput,
+      // type: 'password',
+      icon: 'lock',
+      iconPos: 'left',
+      placeholder: 'Confirm Password',
+      inputStyle: 'fullwidth-inputs',
+      required: true,
+      name: 'confirmPass',
+      value: createUser.confirmPass,
+      passwordMetrics: confirmPasswordMetrics,
+      callbackPasswordMetrics: setConfirmPasswordMetrics,
+      status: inputStatus,
+      callbackInputStatus: setInputStatus
+    },
+    {
+      onContainer: [
+        {
+          inputType: CommonInput,
+          type: 'text',
+          placeholder: 'First name',
+          inputStyle: 'halfwidth-inputs',
+          required: true,
+          name: 'firstName',
+          value: createUser.firstName
+        },
+        {
+          inputType: CommonInput,
+          type: 'text',
+          placeholder: 'Last name',
+          inputStyle: 'halfwidth-inputs',
+          required: true,
+          name: 'lastName',
+          value: createUser.lastName
+        }
+      ]
+    },
+    {
+      onContainer: false,
+      inputType: CommonInput,
+      type: 'email',
+      icon: 'mail',
+      iconPos: 'left',
+      placeholder: 'Email Address',
+      inputStyle: 'fullwidth-inputs',
+      required: true,
+      name: 'email',
+      error: inputStatus.email === null ? false : !inputStatus.email,
+      status: inputStatus.email,
+      statusMessage: 'Invalid email',
+      value: createUser.email
+    },
+    {
+      onContainer: false,
+      inputType: CommonInput,
+      type: 'number',
+      icon: 'mobile alternate',
+      iconPos: 'left',
+      placeholder: 'Phone number',
+      inputStyle: 'fullwidth-inputs',
+      required: true,
+      name: 'phone',
+      value: createUser.phone
+    },
+    {
+      onContainer: false,
+      inputType: CommonDropdown,
+      placeholder: 'Organization name',
+      dropClass: 'fullwidth-dropdown',
+      options: orgList,
+      required: false,
+      name: 'orgId'
+    },
+    {
+      onContainer: false,
+      inputType: CommonInput,
+      type: 'text',
+      placeholder: 'Group (Optional)',
+      inputStyle: 'fullwidth-inputs',
+      required: true,
+      name: 'groups',
+      value: createUser.groups
+    },
+    {
+      onContainer: false,
+      inputType: CommonInput,
+      type: 'text',
+      placeholder: 'Department (Optional)',
+      inputStyle: 'fullwidth-inputs',
+      required: true,
+      name: 'department',
+      value: createUser.department
+    },
+    {
+      onContainer: false,
+      inputType: CommonDropdown,
+      placeholder: 'Select a Role',
+      dropClass: 'fullwidth-dropdown',
+      options: roles,
+      required: false,
+      name: 'roles'
+    }
+  ]
+
+  const { emailFormat } = CommonManipulators
+  const { validateEmail } = CommonValidations
+
+  const handleChange = event => {
+    const { name, value } = event.target
+    let targetValue
+
+    if (name === 'email') {
+      targetValue = emailFormat(value)
     } else {
-      console.log(`Password did'nt match`)
+      targetValue = value
+    }
+
+    setCreateUser({ ...createUser, [name]: targetValue })
+  }
+
+  const handleBlur = event => {
+    const { name } = event.target
+
+    if (name === 'email') {
+      validateEmail(createUser.email, inputStatus, setInputStatus)
     }
   }
 
+  const handleDropDownChange = event => {
+    const input = event.target.innerText
+    const nameOrgRole = event.target.parentNode.parentNode.parentNode.getAttribute(
+      'name'
+    )
+    const namesOrg = event.target.parentNode.parentNode.getAttribute('name')
+    const orgIdFinder = orgList.find(orgName => orgName.text === input)
+    if (nameOrgRole === 'roles' || namesOrg === 'roles') {
+      setCreateUser({ ...createUser, roles: [input] })
+    } else if (nameOrgRole === 'orgId' || namesOrg === 'orgId') {
+      setCreateUser({ ...createUser, orgId: orgIdFinder.value })
+    }
+  }
+
+  const onCreateUser = () => {
+    setLoader(true)
+
+    setTimeout(() => {
+      dispatch(createUsers(createUser))
+    }, 2000)
+    console.log(createUser)
+  }
+
+  const onEnterSubmit = event => {
+    if (event.key === 'Enter') {
+      onCreateUser()
+    }
+  }
+
+  useEffect(() => {
+    if (
+      passwordMetrics.meetsMinimumLength &&
+      passwordMetrics.hasNumber &&
+      passwordMetrics.hasSpecial
+    ) {
+      setInputStatus({
+        ...inputStatus,
+        password: true
+      })
+    } else {
+      setInputStatus({
+        ...inputStatus,
+        password: false
+      })
+    }
+  }, [passwordMetrics])
+
+  useEffect(() => {
+    if (
+      confirmPasswordMetrics.meetsMinimumLength &&
+      confirmPasswordMetrics.hasNumber &&
+      confirmPasswordMetrics.hasSpecial
+    ) {
+      setInputStatus({
+        ...inputStatus,
+        confirmPass: true
+      })
+    } else {
+      setInputStatus({
+        ...inputStatus,
+        confirmPass: false
+      })
+    }
+  }, [confirmPasswordMetrics])
+
+  useEffect(() => {
+    if (
+      inputStatus.email !== null &&
+      inputStatus.email !== false &&
+      inputStatus.password &&
+      inputStatus.confirmPass &&
+      createUser.password === createUser.confirmPass &&
+      createUser.email.length !== 0 &&
+      createUser.uid.length !== 0 &&
+      createUser.firstName.length !== 0 &&
+      createUser.lastName.length !== 0 &&
+      createUser.phone.length !== 0 &&
+      createUser.orgId.length !== 0 &&
+      createUser.roles.length !== 0
+    ) {
+      setDisabled(false)
+    } else {
+      setDisabled(true)
+    }
+  })
+
+  console.log('Password: ' + inputStatus.password)
+  console.log('Confirm Password: ' + inputStatus.confirmPass)
+
   return (
-    <div className="add-user-container">
+    <div className="add-user-container" onKeyDown={onEnterSubmit}>
       <div className="modal-form-title">Add a User</div>
       {inputs.map((data, i) =>
         data.onContainer ? (
@@ -51,30 +357,40 @@ const AddUserOnAccountTab = props => {
                   inputStyle={dataCont.inputStyle}
                   type={dataCont.type}
                   name={dataCont.name}
-                  value={state.name}
-                  onChange={e => handleChange(e)}
+                  value={dataCont.value}
+                  onChange={event => handleChange(event)}
+                  status={dataCont.status}
+                  statusMessage={dataCont.statusMessage}
                 />
               )
             })}
           </div>
         ) : (
-          <data.inputType
-            key={i}
-            icon={data.icon}
-            iconPosition={data.iconPos}
-            placeholder={data.placeholder}
-            inputStyle={data.inputStyle}
-            type={data.type}
-            name={data.name}
-            options={roles}
-            dropdownClass={data.dropClass}
-            value={state.name}
-            onChange={e => {
-              data.inputType === CommonDropdown
-                ? handleDropDownChange(e)
-                : handleChange(e)
-            }}
-          />
+          <Fragment key={i}>
+            <data.inputType
+              key={i}
+              icon={data.icon}
+              iconPosition={data.iconPos}
+              placeholder={data.placeholder}
+              inputStyle={data.inputStyle}
+              type={data.type}
+              name={data.name}
+              value={data.value}
+              options={data.options}
+              dropdownClass={data.dropClass}
+              onChange={event => {
+                data.inputType === CommonDropdown
+                  ? handleDropDownChange(event)
+                  : handleChange(event)
+              }}
+              onBlur={event => handleBlur(event)}
+              error={data.error}
+              status={data.status}
+              statusMessage={data.statusMessage}
+              passwordMetrics={data.passwordMetrics}
+              callbackPasswordMetrics={data.callbackPasswordMetrics}
+            />
+          </Fragment>
         )
       )}
       <div className="actions">
@@ -86,166 +402,13 @@ const AddUserOnAccountTab = props => {
         <CommonButtons
           content="CREATE ACCOUNT"
           btnClass="create-btn btn-blue"
-          onClick={create_user}
+          onClick={onCreateUser}
+          disabled={disabled}
+          loader={loader}
         />
       </div>
     </div>
   )
 }
-
-const inputs = [
-  {
-    onContainer: false,
-    inputType: CommonInput,
-    type: 'text',
-    icon: 'user',
-    iconPos: 'left',
-    placeholder: 'User ID',
-    inputStyle: 'fullwidth-inputs',
-    required: true,
-    name: 'userId'
-  },
-  {
-    onContainer: false,
-    inputType: CommonInput,
-    type: 'password',
-    icon: 'lock',
-    iconPos: 'left',
-    placeholder: 'Password',
-    inputStyle: 'fullwidth-inputs',
-    required: true,
-    name: 'password'
-  },
-  {
-    onContainer: false,
-    inputType: CommonInput,
-    type: 'password',
-    icon: 'lock',
-    iconPos: 'left',
-    placeholder: 'Confirm Password',
-    inputStyle: 'fullwidth-inputs',
-    required: true,
-    name: 'confirmPass'
-  },
-  {
-    onContainer: [
-      {
-        inputType: CommonInput,
-        type: 'text',
-        // icon: '',
-        // iconPos: 'left',
-        placeholder: 'First name',
-        inputStyle: 'halfwidth-inputs',
-        required: true,
-        name: 'fName'
-      },
-      {
-        inputType: CommonInput,
-        type: 'text',
-        // icon: '',
-        // iconPos: 'left',
-        placeholder: 'Last name',
-        inputStyle: 'halfwidth-inputs',
-        required: true,
-        name: 'lName'
-      }
-    ]
-  },
-  {
-    onContainer: false,
-    inputType: CommonInput,
-    type: 'email',
-    icon: 'mail',
-    iconPos: 'left',
-    placeholder: 'Email Address',
-    inputStyle: 'fullwidth-inputs',
-    required: true,
-    name: 'email'
-  },
-  {
-    onContainer: false,
-    inputType: CommonInput,
-    type: 'number',
-    icon: 'mobile alternate',
-    iconPos: 'left',
-    placeholder: 'Phone number',
-    inputStyle: 'fullwidth-inputs',
-    required: true,
-    name: 'pNum'
-  },
-  {
-    onContainer: false,
-    inputType: CommonInput,
-    type: 'text',
-    // icon: '',
-    // iconPos: 'left',
-    placeholder: 'Organization name',
-    inputStyle: 'fullwidth-inputs',
-    required: true,
-    name: 'orgName'
-  },
-  {
-    onContainer: false,
-    inputType: CommonInput,
-    type: 'text',
-    // icon: '',
-    // iconPos: 'left',
-    placeholder: 'Group (Optional)',
-    inputStyle: 'fullwidth-inputs',
-    required: true,
-    name: 'group'
-  },
-  {
-    onContainer: false,
-    inputType: CommonInput,
-    type: 'text',
-    // icon: '',
-    // iconPos: 'left',
-    placeholder: 'Department (Optional)',
-    inputStyle: 'fullwidth-inputs',
-    required: true,
-    name: 'dept'
-  },
-  {
-    onContainer: false,
-    inputType: CommonDropdown,
-    // type: 'text',
-    // icon: '',
-    // iconPos: '',
-    placeholder: 'Select a Role',
-    dropClass: 'fullwidth-inputs',
-    options: roles,
-    required: false,
-    name: 'roles'
-  }
-]
-
-const roles = [
-  {
-    key: 1,
-    text: 'Sample1',
-    value: 'Sample1'
-  },
-  {
-    key: 2,
-    text: 'Sample2',
-    value: 'Sample2'
-  },
-  {
-    key: 3,
-    text: 'Sample3',
-    value: 'Sample3'
-  },
-  {
-    key: 4,
-    text: 'Sample4',
-    value: 'Sample4'
-  },
-  {
-    key: 5,
-    text: 'Sample5',
-    value: 'Sample5'
-  }
-]
 
 export default AddUserOnAccountTab
